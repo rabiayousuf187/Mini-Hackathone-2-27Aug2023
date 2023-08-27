@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SWOSWA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="../../img/Logo.png">
+
+    <!-- External CSS Style Sheet -->
+    <link href="../../css/style.css" rel="stylesheet" />
+</head>
+
+<body id="Top" class="auth">
+    <section class="signup">
+        <div class="container min-vh-100">
+            <div class="main-page-content">
+                <div class="text-center justify-content-center" style="padding: 20px 0px;">
+                    <!-- Heading 1 -->
+                    <h1 class="text-center mb-3 main-heading">SAYLANI WELFARE</h1>
+                    <!-- Heading 2 -->
+                    <h2 class="text-center main-sub-heading">ONLINE MARKET PLACE</h2>
+                </div>
+
+                <form class="form"  id="signup-form">
+                    <div class="upper-form">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <div class="input-group">
+                                    <input id="fullname" name="fullname" type="text" class="form-control"
+                                        placeholder="Full Name" aria-label="fullname" aria-describedby="basic-addon2">
+                                    <span class="inp-icon"><i class="bi bi-person-badge"></i></span>
+                                </div>
+                                <span id="fullnameError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <div class="input-group">
+                                    <input id="username" name="username" type="text" class="form-control"
+                                        placeholder="User Name" aria-label="username" aria-describedby="basic-addon2">
+                                    <span class="inp-icon"><img src="../../img/icon/username.png"
+                                            style="height: 30px;" /></span>
+                                </div>
+                                <span id="usernameError" ></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <div class="input-group">
+                                    <input id="contact" name="contact" type="text" class="form-control"
+                                        placeholder="Contact" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                    <span class="inp-icon"><img src="../../img/icon/phone.png" /></span>
+                                </div>
+                                <span id="contactError" ></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <div class="input-group">
+                                    <input id="email" name=" email" type="email" class="form-control" placeholder="Email"
+                                        aria-label="email" aria-describedby="basic-addon2">
+                                    <span class="inp-icon"><img src="../../img/icon/email.png" /></span>
+                                </div>
+                                <span id="emailError" ></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <div class="input-group">
+                                    <input id="password" name="password" type="password" class="form-control"
+                                        placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
+                                    <span class="inp-icon"><img src="../../img/icon/password.png" /></span>
+                                </div>
+                                <span id="passwordError" ></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="lower-form">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8">
+                                <button id="signup" name="signup" type="submit" value="submit"
+                                    class="btn btn-get-started">Sign Up</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="row justify-content-center text-center align-items-center" style="padding: 0px 25px 70px;">
+                    <div class="col-lg-5 col-md-8 col-sm-8">
+                        <div class="input-group mb-3 justify-content-center">
+                            <button id="loginLink" type="submit" class="btn btn-link" value="submit">Already have an account? Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="../../js/auth/signup.js"></script>
+
+    <!-- External JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
