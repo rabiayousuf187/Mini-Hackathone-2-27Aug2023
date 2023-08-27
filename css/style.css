@@ -2,6 +2,10 @@
     margin: 0px;
     padding: 0px;
 }
+.container-fluid{
+    margin: 0;
+    padding: 0;
+}
 a{
     text-decoration: none;
 }
@@ -1390,4 +1394,24 @@ section.main-page .main-heading{
 }
 .btn-get-started {
     background: #573e67;
+}
+
+.top-header{
+    background: #830bce;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.top-header{
+    padding: 30px 10px;
+}
+.top-header .AppName h2 {
+    font-size: 24px;
+    color: white;
+}
+
+.top-header .top-header-right a{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
 }
