@@ -125,172 +125,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
     const uploadname = document.getElementById("uploadname");
     const updatepass = document.getElementById("updatepass");
 
-    let validateForm = (event) => {
-        event.preventDefault();
-
-        const firstname = document.getElementById("firstname").value;
-        let fileimg = document.getElementById("fileimg").files[0];
-        const lastname = document.getElementById("lastname").value;
-        const password = document.getElementById("password").value;
-        const repassword = document.getElementById("repassword").value;
-        let acc_type = "blogger", userAcc;
-        // let acc_type = document.querySelector('input[name="acc_type"]:checked');
-
-        console.log("firstname = ", firstname);
-        console.log("lastname = ", lastname);
-        console.log("password = ", password);
-        console.log("repassword = ", repassword);
-
-        // File Img Valid
-        if (fileimg) {
-            // Validate image type
-            if (!fileimg.type.startsWith("image/")) {
-                console.log("Please select a valid image fileimg.");
-                // alert("Please select a valid image fileimg.");
-                return;
-            }
-
-            // Validate image size (in bytes)
-            const maxSize = 5 * 1024 * 1024; // 5 MB
-            if (fileimg.size > maxSize) {
-                console.log(
-                    "Selected image is too large. Please choose a smaller image."
-                );
-                // alert("Selected image is too large. Please choose a smaller image.");
-                return;
-            }
-
-            // Now you can proceed with uploading the image or other actions
-            console.log("Image is valid:", fileimg.name, fileimg.type, fileimg.size);
-            // Your upload logic here
-            clearError(document.getElementById("fileimg"));
-        } else {
-            // alert("Please select an image file.");
-            console.log("Please select an image file.");
-            showError(document.getElementById("fileimg"), "Image File is required.");
-        }
-
-        // Validate firstname
-        if (firstname.trim() === "") {
-            showError(document.getElementById("firstname"), "firstname is required.");
-        } else if (!nameRegex.test(firstname.trim())) {
-            console.log("Invalid: Contains only letters and spaces.");
-            showError(document.getElementById("firstname"), "Invalid: Contains only letters and spaces.");
-        } else {
-            console.log("Valid: Contains only letters and spaces.");
-            clearError(document.getElementById("firstname"));
-        }
-        // Validate firstname
-        if (lastname.trim() === "") {
-            showError(document.getElementById("lastname"), "lastname is required.");
-        } else if (!nameRegex.test(lastname.trim())) {
-            console.log("Invalid: Contains only letters and spaces.");
-            showError(document.getElementById("lastname"), "Invalid: Contains only letters and spaces.");
-        } else {
-            console.log("Valid: Contains only letters and spaces.");
-            clearError(document.getElementById("lastname"));
-        }
-        if (repassword.trim() === "") {
-            showError(document.getElementById("repassword"), "repassword is required.");
-        } else if (!passwordRegex.test(repassword.trim())) {
-            console.log("Invalid: Password");
-            showError(document.getElementById("repassword"), "Invalid: rePassword.");
-        } else if (password != repassword) {
-            console.log("RePassword is not match");
-            console.log("RePassword ==", repassword);
-            console.log("Password ==", password);
-            showError(document.getElementById("repassword"), "Invalid: rePassword.");
-        } else {
-            console.log("Valid:  Password");
-            clearError(document.getElementById("repassword"));
-        }
-
-
-        // Validate password
-        if (password.trim() === "") {
-            showError(document.getElementById("password"), "Password is required.");
-        } else if (!passwordRegex.test(password)) {
-            showError(
-                document.getElementById("password"),
-                "Password must be at least 8 characters long and contain at least one letter and one number."
-            );
-        } else {
-            clearError(document.getElementById("password"));
-        }
-
-
-        console.log(
-            "!document.querySelector.error ==== ",
-            document.querySelector("#signup-form")
-        );
-        console.log(
-            "!document.querySelector.error ==== ",
-            !document.querySelector(".error")
-        );
-        if (!document.querySelector(".error")) {
-            if (
-                !fileimg ||
-                !firstname ||
-                !lastname ||
-                !password ||
-                !repassword
-            ) {
-                alert("Refill Form for all Feilds\nSome Feilds are undefined.");
-                console.log("Refill Form for all Feilds\nSome Feilds are undefined.");
-            } else {
-                // Submit the form or do any other required action here
-                console.log("Form submitted successfully!");
-                // Call the function to create a user with Firebase Authentication
-                // saveImg(fileimg, itemname, selectedCategory)
-                //     .then((downloadURL) => {
-                //         console.log("GET downloadURL === , ", downloadURL);
-                //         if (downloadURL) {
-                //             console.log(
-                //                 "Data before write === ",
-                //                 downloadURL,
-                //             );
-                //             console.log("User Role", acc_type);
-                //             console.log("User Created", user);
-                //             writeUserData(userId, downloadURL, firstname, lastname, password, acc_type)
-                //                 .then(() => {
-                //                     userAcc = {
-                //                         userId: user.uid,
-                //                         firstname: firstname,
-                //                         lastname: lastname,
-                //                         acc_type: acc_type,
-                //                         blogimg: downloadURL,
-
-                //                     };
-                //                     localStorage.setItem("userAcc", JSON.stringify(userAcc));
-                //                     document.getElementById("itemname").value = "";
-                //                     document.getElementById("itemcategory").value =
-                //                         "Select Category";
-                //                     document.getElementById("itemcontent").value = "";
-                //                     document.getElementById("unitname").value = "";
-                //                     document.getElementById("unitprice").value = "";
-                //                     document.getElementById("fileimg").value = null; // Clear file input
-
-                //                     window.location.href = `./dashboard.html`;
-
-                //                 })
-                //                 .catch((error) => {
-                //                     console.error("Error writing user data:", error);
-                //                 });
-
-                //         } else {
-                //             console.log("No DownloadURL RX.");
-                //         }
-                //     })
-                //     .catch((error) => {
-                //         // Handle any errors that may occur during the data retrieval
-                //         console.error("Error:", error);
-                //     });
-
-
-            }
-        }
-    }
-
     // Function to display error message for an input field
     let showError = (inputElement, errorMessage) => {
         const errorElement = document.getElementById(inputElement.id + "Error");
@@ -317,7 +151,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
             errorElement.classList.remove("error")
         );
     }
-
 
     // Get Category Data for admin
     let getAllItemData = async (url) => {
@@ -427,7 +260,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
                                 firstname,
                                 lastname,
                                 acc_type,
-                                email
+                                email,
+                                password,
                             } = userPrevData;
                             
                             writeUserData(userId, downloadURL, firstname, lastname, email, password, acc_type)
@@ -466,6 +300,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     // Attach form validation function to the form's submit event
     uploadimg.addEventListener("submit", validateImg);
 
+    // *********************************************
     let validateName = (event) => {
         event.preventDefault();
 
@@ -551,7 +386,129 @@ if (userAcc && userAcc.acc_type === "blogger") {
     }
     // Attach form validation function to the form's submit event
     uploadname.addEventListener("submit", validateName);
-    signupForm.addEventListener("submit", validateForm);
+
+    // *********************************************
+    
+    let validatePass = (event) => {
+        event.preventDefault();
+        
+        let oldpass = document.getElementById("oldpass").value;
+            let password = document.getElementById("password").value;
+            let repassword = document.getElementById("repassword").value;
+        let acc_type = "blogger", prevpass = userAcc.password;
+
+        console.log("prevpass = ", prevpass);
+        console.log("oldpass = ", oldpass);
+        console.log("password = ", password);
+        console.log("repassword = ", repassword);
+
+        if (oldpass.trim() === "") {
+            showError(
+              document.getElementById("oldpass"),
+              "Old Passsword is required."
+            );
+          } else if (oldpass.trim() != prevpass) {
+            alert("Old Passsword  is not match.")
+           showError(
+             document.getElementById("oldpass"),
+             "Old Passsword  is not match."
+           );
+          } else {
+            clearError(document.getElementById("oldpass"));
+          }
+
+       if (repassword.trim() === "" ) {
+            showError(document.getElementById("repassword"), "repassword is required.");
+        } else if (!passwordRegex.test(repassword.trim())) {
+            console.log("Invalid: Password must be at least 8 characters long and contain at least one letter and one number.");
+            showError(document.getElementById("repassword"), "Invalid: rePassword.");
+        } else if (password != repassword) {
+            console.log("RePassword is not match");
+            console.log("RePassword ==", repassword);
+            console.log("Password ==", password);
+            showError(document.getElementById("repassword"), "Invalid: rePassword.");
+        } else {
+            console.log("Valid:  Password");
+            clearError(document.getElementById("repassword"));
+        }
+
+
+        // Validate password
+        if (password.trim() === "") {
+            showError(document.getElementById("password"), "Password is required.");
+        } else if (!passwordRegex.test(password)) {
+            showError(
+                document.getElementById("password"),
+                "Password must be at least 8 characters long and contain at least one letter and one number."
+            );
+        } else if (password == prevpass && repassword == prevpass) {
+            console.log("New Password is match with previous Password");
+            console.log("prev pass ==", prevpass);
+            console.log("RePassword ==", repassword);
+            console.log("Password ==", password);
+            showError(document.getElementById("password"), "Invalid: New Password is matched with previous one.");
+            showError(document.getElementById("repassword"), "Invalid: New Password is matched with previous one.");
+        } else {
+            clearError(document.getElementById("password"));
+        }
+
+
+        console.log(
+            "!document.querySelector.error ==== ",
+            document.querySelector("#signup-form")
+        );
+        console.log(
+            "!document.querySelector.error ==== ",
+            !document.querySelector(".error")
+        );
+        if (!document.querySelector(".error")) {
+            if (
+                !oldpass ||
+                !password ||
+                !repassword
+            ) {
+                alert("Refill Passwords");
+                console.log("Refill Form for all Feilds\nSome Feilds are undefined.");
+            } else {
+                // Submit the form or do any other required action here
+                console.log("Form submitted successfully!");
+
+                
+                let {
+                    userId, 
+                    acc_type,
+                    email,
+                    firstname,
+                    lastname,
+                    blogimg
+                } = userPrevData;
+                
+                writeUserData(userId, blogimg, firstname, lastname, email, password, acc_type)
+                    .then(() => {
+                        userAcc = {
+                            id: userId,
+                            firstname: firstname,
+                            lastname: lastname,
+                            email: email,
+                            password: password,
+                            acc_type: acc_type,
+                            blogimg: blogimg,
+                        };
+                        localStorage.setItem("userAcc", JSON.stringify(userAcc));
+
+                        window.location.href = `./dashboard.html`;
+                        console.log("Password successfully Updated");
+                        alert("Password successfully Updated");
+                    })
+                    .catch((error) => {
+                        console.error("Error update Password:", error);
+                        alert("Error update Password:", error);
+                    });
+                            }
+        }
+    }
+
+    updatepass.addEventListener("submit", validatePass);
 
 
 
