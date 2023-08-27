@@ -1,9 +1,12 @@
 console.log("JS script integrated");
 
 function openpage() {
-    console.log("window.location ====", window.location);
+    let current_url = window.location;
+    console.log("current_url main === ", current_url);
     setTimeout(() => {
-        window.location.href = '/pages/auth/signup.html';
+        current_url = current_url + 'pages/auth/signup.html';
+        console.log("current_url === ", current_url);
+        window.location.replace(current_url);
 
-    }, 1000);
+    }, 2000);
 }
