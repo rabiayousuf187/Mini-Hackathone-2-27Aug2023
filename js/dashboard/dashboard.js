@@ -10,6 +10,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
 
   let userId = userAcc.id;
+  let imageURL = userAcc.blogimg;
+  console.log("userAcc ", userAcc);
   let username = `${userAcc.firstname} ${userAcc.lastname} `;
   console.log("userAcc Id", userId);
   // Use the Firebase Configuration functions
@@ -75,7 +77,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     ind, username,
     date,
     blogtitle,
-    blogcontent, imageURL = "../../img/profile.png"
+    blogcontent, imageURL
   ) => {
     username = capitalizeWords(username);
     // let link = replaceSpacesWithHyphens(category);
@@ -149,6 +151,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
           // Here you can continue with rendering your data or performing other tasks
           console.log("updated into Array ====:", blogData);
 
+          userAcc.blogimg == null? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
           const container = document.getElementById("blog-container");
           blogData.forEach((ele, ind) => {
 
@@ -164,7 +167,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
               ele.blogdate,
               ele.blogtitle,
               ele.blogcontent,
-
+              imageURL
             );
 
             // const lazyImages = document.querySelectorAll(".lazy-image");
