@@ -18,6 +18,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     ref,
     set,
     get,
+    remove,
     storage,
     storageRef,
     uploadBytes,
@@ -37,11 +38,13 @@ if (userAcc && userAcc.acc_type === "blogger") {
   };
   let deleteBlog = (userId, id) =>{
     return new Promise((resolve, reject) => {
-      const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
+      const userRef = ref(database, 'blogs/' + userId + `/${id}`);
 
       remove(userRef)
         .then(() => {
           console.log("Blog Removed to Firebase Database.");
+          alert("Blog Removed to Firebase Database.");
+          location.reload();
           resolve(); // Resolve the promise to indicate success
         })
         .catch((error) => {
@@ -111,18 +114,20 @@ if (userAcc && userAcc.acc_type === "blogger") {
         link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
         console.log("Delete link === ",link);
 
-        deleteBlog(link)
+        deleteBlog(userId,link)
       } else if (
         event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
       ) {
         console.log("Icon selected");
         link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
         console.log("Edit link === ",link);
+        alert("Could not Edit Yet")
+        // editeBlog(userId,link)
       }else {
         console.log("not a target element");
       }
 
-      addCart(selectedCategory, link);
+      // addCart(selectedCategory, link);
     });
   };
 
