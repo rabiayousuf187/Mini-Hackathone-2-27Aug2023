@@ -35,7 +35,30 @@ if (userAcc && userAcc.acc_type === "blogger") {
       return match.toUpperCase();
     });
   };
+  let deleteBlog = (userId, id) =>{
+    return new Promise((resolve, reject) => {
+      const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
 
+      remove(userRef)
+        .then(() => {
+          console.log("Blog Removed to Firebase Database.");
+          resolve(); // Resolve the promise to indicate success
+        })
+        .catch((error) => {
+          console.error("Error in  Removeing :", error);
+          reject(error); // Reject the promise with the error
+        });
+    });
+  }
+  // let deleteBlog = (id) =>{
+  //   .remove()
+  //   .then(() => {
+  //       console.log(`User with ID ${userIdToDelete} deleted successfully.`);
+  //   })
+  //   .catch((error) => {
+  //       console.error(`Error deleting user: ${error}`);
+  //   });
+  // }
   let showItem = (
     container,
     ind, username,
@@ -45,7 +68,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   ) => {
     username = capitalizeWords(username);
     // let link = replaceSpacesWithHyphens(category);
-    const itemHTML = `<div class="row" id=${ind}>
+    const itemHTML = `<div class="row" id='${blogtitle}'>
     <div class="title">
         <div class="blog-details">
             <div class="blogger-img">
@@ -63,42 +86,44 @@ if (userAcc && userAcc.acc_type === "blogger") {
             <p id="blog-content">
                 ${blogcontent}</p>
         </div>
+        <div class="blog-content">
+            <a id="delete" href
+            ="#" >Delete</a>
+            <a id="edit" href ="#">Edit</a>
+        </div>
     </div>
 </div>`;
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
-    // container.addEventListener("click", function (event) {
-    //   let link;
-    //   console.log(
-    //     "Button pressed",
-    //     event,
-    //     event.target.querySelector("i"),
-    //     event.target.tagName
-    //   );
-    //   if (
-    //     event.target.tagName === "BUTTON" &&
-    //     event.target.getAttribute("disabled") === false
-    //   ) {
-    //     link = event.target.getAttribute("id");
-    //     console.log(
-    //       "Show Items of ====",
-    //       link,
-    //       event.target.getAttribute("disabled")
-    //     );
-    //     console.log("Button selected");
-    //   } else if (
-    //     event.target.tagName === "I" &&
-    //     event.target.closest("BUTTON").getAttribute("disabled") === false
-    //   ) {
-    //     console.log("Icon selected");
-    //     link = event.target.closest("BUTTON").getAttribute("id");
-    //   } else {
-    //     console.log("not a target element");
-    //   }
+    container.addEventListener("click", function (event) {
+      let link;
+      console.log(
+        "Button pressed",
+        event,
+        event.target.querySelector("i"),
+        event.target.tagName
+      );
+      if (
+        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'delete'
+      ) {
+        console.log("Icon selected");
+        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
+        console.log("Delete link === ",link);
 
-    //   addCart(selectedCategory, link);
-    // });
+        deleteBlog(link)
+      } else if (
+        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
+      ) {
+        console.log("Icon selected");
+        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
+        console.log("Edit link === ",link);
+      }else {
+        console.log("not a target element");
+      }
+
+      addCart(selectedCategory, link);
+    });
   };
 
   window.addEventListener("load", () => {
