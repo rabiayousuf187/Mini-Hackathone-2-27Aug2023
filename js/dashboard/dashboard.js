@@ -28,6 +28,14 @@ if (userAcc && userAcc.acc_type === "blogger") {
     document.getElementById(elementId).style.display = display;
   };
 
+  const addClickListener = (elementId, destination) => {
+    const element = document.getElementById(elementId);
+    element.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.location.href = destination;
+    });
+  };
+  addClickListener('profile' , './profile.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //

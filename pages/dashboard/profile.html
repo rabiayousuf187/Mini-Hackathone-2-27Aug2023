@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SWOSWA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="../../img/Logo.png">
+
+    <!-- External CSS Style Sheet -->
+    <link href="../../css/style.css" rel="stylesheet" />
+</head>
+
+<body id="Top" class="auth dashboard">
+    <section class="signup">
+        <div class="container-fluid">
+            <div class="container">
+
+                <div class="top-header">
+                    <div class="AppName">
+                        <h2>Personal BLogging App</h2>
+                    </div>
+                    <div class="top-header-right">
+                        <p id="adminname"></p>
+                        <a id="logout" href="#" type="button">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="top-header header2">
+                <h2>
+                    Dashboard
+                </h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="main-page-content createblog profile-page">
+
+                <form class="form" id="uploadimg">
+                    <div class="upper-form">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group" style="width: 80%;
+                                margin: auto;">
+                                    <label for="fileimg" class="btn btn-primary btn-block btn-outlined img-placeholder">
+                                    </label>
+                                    <input id="fileimg" name="fileimg" type="file" class="form-control"
+                                        placeholder="fileimg" aria-label="fileimg" aria-describedby="basic-addon2"
+                                        accept="image/*" style="display: none;" />
+                                </div>
+                                <span id="fileimgError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end text-left">
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;
+                            padding: 0;
+                            margin: 0;">
+                                <button id="uploadImg" name="signup" type="submit" value="submit"
+                                    class="btn btn-get-started update-profile">Upload Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form" id="uploadname">
+                    <div class="upper-form">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <input id="firstname" name="firstname" type="text" class="form-control"
+                                        placeholder="First Name" aria-label="firstname" aria-describedby="basic-addon2">
+                                </div>
+                                <span id="firstnameError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <input id="lastname" name="lastname" type="text" class="form-control"
+                                        placeholder="Last Name" aria-label="lastname" aria-describedby="basic-addon2">
+                                </div>
+                                <span id="lastnameError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end text-left">
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;
+                            padding: 0;
+                            margin: 0;">
+                                <button id="updateName" name="signup" type="submit" value="submit"
+                                    class="btn btn-get-started update-profile">Update Names</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <form class="form" id="signup-form"> -->
+                <form class="form" id="updatepass">
+                    <div class="upper-form">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <input id="password" name="password" type="password" class="form-control"
+                                        placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
+                                </div>
+                                <span id="passwordError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <input id="repassword" name="repassword" type="password" class="form-control"
+                                        placeholder="repassword" aria-label="repassword"
+                                        aria-describedby="basic-addon2">
+                                </div>
+                                <span id="repasswordError"></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end text-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;
+                            padding: 0;
+                            margin: 0;">
+                                <button id="updatePassword" name="signup" type="submit" value="submit"
+                                    class="btn btn-get-started update-profile">Update Password</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="../../js/dashboard/profile.js"></script>
+
+    <!-- External JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
