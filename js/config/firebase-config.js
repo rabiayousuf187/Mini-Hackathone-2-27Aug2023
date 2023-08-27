@@ -12,14 +12,14 @@
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
-    apiKey: "AIzaSyAT7yf6n4tFUjvqJKJWDcJpJM26qsQ9yOg",
-    authDomain: "hackthonetrial-saylani-shopapp.firebaseapp.com",
-    databaseURL: "https://hackthonetrial-saylani-shopapp-default-rtdb.firebaseio.com",
-    projectId: "hackthonetrial-saylani-shopapp",
-    storageBucket: "hackthonetrial-saylani-shopapp.appspot.com",
-    messagingSenderId: "450136022057",
-    appId: "1:450136022057:web:f3d1cdd876da1333949038",
-    measurementId: "G-DQZD8KB8J7"
+    apiKey: "AIzaSyBLhhXmdNIjrWSHEYNoSSZaS84mSfStvp4",
+  authDomain: "personalblogappminihack-aug-23.firebaseapp.com",
+  databaseURL: "https://personalblogappminihack-aug-23-default-rtdb.firebaseio.com",
+  projectId: "personalblogappminihack-aug-23",
+  storageBucket: "personalblogappminihack-aug-23.appspot.com",
+  messagingSenderId: "489857459770",
+  appId: "1:489857459770:web:d7001fd80eb71d5679b703",
+  measurementId: "G-E9VX98NWJL"
   };
 
   // Initialize Firebase
