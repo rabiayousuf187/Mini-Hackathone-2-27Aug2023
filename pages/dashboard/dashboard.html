@@ -15,86 +15,50 @@
     <link href="../../css/style.css" rel="stylesheet" />
 </head>
 
-<body id="Top" class="auth">
+<body id="Top" class="auth dashboard">
     <section class="signup">
-        <<div class="container-fluid">
+        <div class="container-fluid">
             <div class="container">
-                
-            <div class="top-header">
-                <div class="AppName">
-                    <h2>Personal BLogging App</h2>
-                </div>
-                <div class="top-header-right">
-                    <p id="adminname"></p>
-                    <a id="logout" href="#" type="button">Logout</a>
+
+                <div class="top-header">
+                    <div class="AppName">
+                        <h2>Personal BLogging App</h2>
+                    </div>
+                    <div class="top-header-right">
+                        <p id="adminname"></p>
+                        <a id="logout" href="#" type="button">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-           </div>
-           <div class="container">
+        <div class="container">
 
             <div class="top-header header2">
                 <h2>
                     Dashboard
                 </h2>
             </div>
-           </div>
-        <div class="container min-vh-100">
-            <div class="main-page-content">
-                <form class="form"  id="signup-form">
+        </div>
+        <div class="container">
+            <div class="main-page-content createblog">
+                <form class="form" id="signup-form">
                     <div class="upper-form">
                         <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="input-group">
-                                    <input id="firstname" name="firstname" type="text" class="form-control"
-                                        placeholder="First Name" aria-label="firstname" aria-describedby="basic-addon2">
+                                    <input id="blogtitle" name="blogtitle" type="text" class="form-control"
+                                        placeholder="Blog Title" aria-label="blogtitle" aria-describedby="basic-addon2">
                                 </div>
-                                <span id="firstnameError"></span>
+                                <span id="blogtitleError"></span>
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
-                                <div class="input-group">
-                                    <input id="lastname" name="lastname" type="text" class="form-control"
-                                        placeholder="Last Name" aria-label="lastname" aria-describedby="basic-addon2">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="What is in your mind" id="blogcontent"
+                                        style="height: 100px"></textarea>
                                 </div>
-                                <span id="lastnameError"></span>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
-                                <div class="input-group">
-                                    <input id="username" name="username" type="text" class="form-control"
-                                        placeholder="User Name" aria-label="username" aria-describedby="basic-addon2">
-                                </div>
-                                <span id="usernameError" ></span>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
-                                <div class="input-group">
-                                    <input id="email" name=" email" type="email" class="form-control" placeholder="Email"
-                                        aria-label="email" aria-describedby="basic-addon2">
-                                </div>
-                                <span id="emailError" ></span>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
-                                <div class="input-group">
-                                    <input id="password" name="password" type="password" class="form-control"
-                                        placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
-                                </div>
-                                <span id="passwordError" ></span>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
-                                <div class="input-group">
-                                    <input id="repassword" name="repassword" type="repassword" class="form-control"
-                                        placeholder="repassword" aria-label="repassword" aria-describedby="basic-addon2">
-                                </div>
-                                <span id="repasswordError" ></span>
+                                <span id="blogcontentError"></span>
                             </div>
                         </div>
 
@@ -102,23 +66,17 @@
                     </div>
 
                     <div class="lower-form">
-                        <div class="row justify-content-center text-center">
-                            <div class="col-lg-5 col-md-8 col-sm-8">
+                        <div class="row justify-content-start text-center">
+                            <div class="col-lg-5 col-md-8 col-sm-8" style="text-align: left;
+                            padding: 0;
+                            margin: 0;">
                                 <button id="signup" name="signup" type="submit" value="submit"
-                                    class="btn btn-get-started">Sign Up</button>
+                                    class="btn btn-get-started publish">Publish Blog</button>
 
                             </div>
                         </div>
                     </div>
                 </form>
-                
-                <div class="row justify-content-center text-center align-items-center" style="padding: 0px 25px 70px;">
-                    <div class="col-lg-5 col-md-8 col-sm-8">
-                        <div class="input-group mb-3 justify-content-center">
-                            <button id="loginLink" type="submit" class="btn btn-link" value="submit">Already have an account? Login</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

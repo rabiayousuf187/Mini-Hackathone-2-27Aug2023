@@ -6,6 +6,12 @@
     margin: 0;
     padding: 0;
 }
+.container-fluid .container{
+    width: 100%;
+}
+.container{
+    width: 60%;
+}
 a{
     text-decoration: none;
 }
@@ -1402,6 +1408,11 @@ section.main-page .main-heading{
     align-items: center;
     justify-content: space-between;
 }
+.top-header p#adminname {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+}
 .top-header{
     padding: 30px 10px;
 }
@@ -1414,6 +1425,7 @@ section.main-page .main-heading{
     font-size: 20px;
     color: white;
     font-weight: 500;
+    padding: 0px 15px;
 }
 .header2{
     background-color: white;
@@ -1431,4 +1443,31 @@ section.main-page .main-heading{
 .signup .form input:focus {
     border: 2px solid #830bce;
     box-shadow: 0 0 0 0.25rem rgb(131 11 206 / 34%) !important;
+}
+.top-header-right {
+    display: flex;
+}
+.createblog {
+    padding: 10px 50px;
+    /* width: 80%; */
+    /* margin: auto; */
+    border: 2px solid #80808036;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px rgb(193 171 171 / 29%);
+}
+.signup .form {
+    width: 80%;
+margin: auto;
+padding: 30px 10px;
+}
+.publish {
+    width: 145px;
+    font-size: 18px;
+    height: 40px;
+}
+.lower-form {
+    padding: 20px 16px;
+}
+.dashboard .main-page-content{
+    height: fit-content;
 }
