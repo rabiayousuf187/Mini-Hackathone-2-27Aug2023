@@ -3,7 +3,7 @@ import firebaseExports from "../config/firebase-config.js";
 let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
-if (userAcc && userAcc.acc_type === "user") {
+if (userAcc && userAcc.acc_type === "blogger") {
 
   // Function to add or remove a class based on media query
   let toggleClassBasedOnMediaQuery = (mediaQuery, element, className) => {
