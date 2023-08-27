@@ -63,15 +63,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
         });
     });
   }
-  // let deleteBlog = (id) =>{
-  //   .remove()
-  //   .then(() => {
-  //       console.log(`User with ID ${userIdToDelete} deleted successfully.`);
-  //   })
-  //   .catch((error) => {
-  //       console.error(`Error deleting user: ${error}`);
-  //   });
-  // }
+
   let showItem = (
     container,
     ind, username,

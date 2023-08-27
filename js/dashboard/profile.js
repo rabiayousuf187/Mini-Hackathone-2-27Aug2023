@@ -111,6 +111,16 @@ if (userAcc && userAcc.acc_type === "blogger") {
         }, 1000);
     });
 
+    
+  // Regular expressions for validation
+  // Email Regex: It should not start or end with whitespace.
+  // It should have one "@" symbol in the middle.
+  // It should have at least one character before and after the "@" symbol.
+  // It should have at least one character after the last "." symbol.
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // const contactRegex = /^\d{11}$/;
+  const nameRegex = /^[A-Za-z\s]+$/;
+
     const uploadimg = document.getElementById("uploadimg");
     const uploadname = document.getElementById("uploadname");
     const updatepass = document.getElementById("updatepass");
@@ -208,13 +218,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
             clearError(document.getElementById("password"));
         }
 
-
-        // if (username.includes("admin")) {
-        //   console.log("Substring found!");
-        //   acc_type = "admin";
-        // } else {
-        //   acc_type = "user";
-        // }
 
         console.log(
             "!document.querySelector.error ==== ",
@@ -463,8 +466,91 @@ if (userAcc && userAcc.acc_type === "blogger") {
     // Attach form validation function to the form's submit event
     uploadimg.addEventListener("submit", validateImg);
 
+    let validateName = (event) => {
+        event.preventDefault();
 
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+
+        console.log("firstname = ", firstname);
+        console.log("lastname = ", lastname);
+
+        // Validate firstname
+        if (firstname.trim() === "") {
+            showError(document.getElementById("firstname"), "firstname is required.");
+        } else if (!nameRegex.test(firstname.trim())) {
+            console.log("Invalid: Contains only letters and spaces.");
+            showError(document.getElementById("firstname"), "Invalid: Contains only letters and spaces.");
+        } else {
+            console.log("Valid: Contains only letters and spaces.");
+            clearError(document.getElementById("firstname"));
+        }
+
+        // Validate firstname
+        if (lastname.trim() === "") {
+            showError(document.getElementById("lastname"), "lastname is required.");
+        } else if (!nameRegex.test(lastname.trim())) {
+            console.log("Invalid: Contains only letters and spaces.");
+            showError(document.getElementById("lastname"), "Invalid: Contains only letters and spaces.");
+        } else {
+            console.log("Valid: Contains only letters and spaces.");
+            clearError(document.getElementById("lastname"));
+        }
+        
+
+        console.log(
+            "!document.querySelector.error ==== ",
+            document.querySelector("#signup-form")
+        );
+        console.log(
+            "!document.querySelector.error ==== ",
+            !document.querySelector(".error")
+        );
+        if (!document.querySelector(".error")) {
+            if (
+                !firstname ||
+                !lastname 
+            ) {
+                alert("Refill Fist and Last Name");
+                console.log("Refill Fist and Last Name");
+            } else {
+                // Submit the form or do any other required action here
+                console.log("Form submitted successfully!");
+
+                let {
+                    userId, 
+                    acc_type,
+                    email,
+                    blogimg
+                } = userPrevData;
+                
+                writeUserData(userId, blogimg, firstname, lastname, email, password, acc_type)
+                    .then(() => {
+                        userAcc = {
+                            id: userId,
+                            firstname: firstname,
+                            lastname: lastname,
+                            email: email,
+                            password: password,
+                            acc_type: acc_type,
+                            blogimg: blogimg,
+                        };
+                        localStorage.setItem("userAcc", JSON.stringify(userAcc));
+
+                        window.location.href = `./dashboard.html`;
+                        console.log("user Names successfully Updated");
+                        alert("user Names successfully Updated");
+                    })
+                    .catch((error) => {
+                        console.error("Error update user Names:", error);
+                        alert("Error update user Names:", error);
+                    });
+                
+            }
+        }
+    }
     // Attach form validation function to the form's submit event
+    uploadname.addEventListener("submit", validateName);
     signupForm.addEventListener("submit", validateForm);
 
 
