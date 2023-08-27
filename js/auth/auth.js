@@ -1,12 +1,19 @@
 let userInfo = localStorage.getItem("userAcc");
+let AllBlog = localStorage.getItem("AllBlog");
 
 userInfo === null ? userInfo === null : userInfo = JSON.parse(userInfo);
+AllBlog === null ? AllBlog === null : AllBlog = AllBlog;
 function isAuth() {
   if (userInfo !== null ) {
     console.log("user Exist ==== ", userInfo);
     console.log("after Parse ==== ", userInfo);
     return userInfo;
-  } else {
+  } else if(AllBlog === "All_User"){
+    console.log("All Users can read Blog ==== ", AllBlog, "redirect to SignIn Page");
+    return AllBlog;
+    // window.location.href = "../auth/signin.html";
+    // return userInfo =  false;
+  }else {
     console.log("user didnot Exist ==== ", userInfo, "redirect to SignIn Page");
     window.location.href = "../auth/signin.html";
     // return userInfo =  false;
