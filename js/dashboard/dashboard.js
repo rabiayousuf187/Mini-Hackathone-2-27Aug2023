@@ -4,11 +4,11 @@ let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
 if (userAcc && userAcc.acc_type === "blogger") {
-  
+
   console.log("Dashboard Page")
   document.getElementById("Top").style.display = "block";
-  document.getElementById("adminname").innerText = userAcc.firstname + " "+ userAcc.lastname;
-  
+  document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
+
   let userId = userAcc.id;
   let username = `${userAcc.firstname} ${userAcc.lastname} `;
   console.log("userAcc Id", userId);
@@ -30,38 +30,38 @@ if (userAcc && userAcc.acc_type === "blogger") {
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
+  let capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, function (match) {
+      return match.toUpperCase();
+    });
+  };
 
   let showItem = (
     container,
-    ind,
-    category,
-    name,
-    weight,
-    price,
-    imageURL,
-    description,
-    disabled
+    ind, username,
+    date,
+    blogtitle,
+    blogcontent, imageURL = "../../img/profile.png"
   ) => {
-    category = capitalizeWords(category);
-    let link = replaceSpacesWithHyphens(category);
-    const itemHTML = `<div class="row">
+    username = capitalizeWords(username);
+    // let link = replaceSpacesWithHyphens(category);
+    const itemHTML = `<div class="row" id=${ind}>
     <div class="title">
         <div class="blog-details">
             <div class="blogger-img">
-                <img src="../../img/placeholder.png"/>
+                <img src="${imageURL}" alt="user" data-src="${imageURL}" class="lazy-image"/>
             </div>
             <div class="blog-title">
-                <h3 id="blog-title">Title 01kjdflkjf</h3>
+                <h3 id="blog-title">${blogtitle}</h3>
                 <div class="user-details">
-                    <p id="username">Uer Name - </p> 
-                    <p id="date">Uer Name - </p> 
+                    <p id="username">${username} - </p> 
+                    <p id="date">${date}</p> 
                 </div>
             </div>
         </div>
         <div class="blog-content">
             <p id="blog-content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, porro ea, sint omnis et dolore est quam quaerat, aut commodi beatae. Asperiores assumenda earum illum facilis totam harum magni saepe. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi qui harum aspernatur alias dolores quas vel praesentium sed saepe ad eaque unde voluptatibus officia possimus id, a inventore amet beatae!
-            </p>
+                ${blogcontent}</p>
         </div>
     </div>
 </div>`;
@@ -112,15 +112,45 @@ if (userAcc && userAcc.acc_type === "blogger") {
           console.log("updated into Array ====:", blogData);
 
           const container = document.getElementById("blog-container");
-          itemsData.forEach((ele, ind) => {
-          showItem = (
-            container,
-            ind, username, 
-            ele.date,
-            ele.blogtitle,
-            ele.blogcontent,
-          )
-          }
+          blogData.forEach((ele, ind) => {
+
+            console.log("username, ele.date,ele.blogtitle,ele.blogcontent, === ", username, 
+          ele.blogdate,ele.blogtitle,ele.blogcontent,);
+            // ind, username, 
+            //   date,
+            //   blogtitle,
+            //   blogcontent,imageURL = ""
+            showItem(
+              container,
+              ind, username,
+              ele.blogdate,
+              ele.blogtitle,
+              ele.blogcontent,
+
+            );
+
+            // const lazyImages = document.querySelectorAll(".lazy-image");
+            //       const loadImagePromises = [];
+            //       lazyImages.forEach((img) => {
+            //         const promise = new Promise((resolve) => {
+            //           img.addEventListener("load", () => {
+            //             resolve();
+            //           });
+            //           img.src = img.getAttribute("data-src");
+            //         });
+            //         loadImagePromises.push(promise);
+            //       });
+            //       Promise.all(loadImagePromises)
+            //         .then(() => {
+            //           console.log("All lazy-loaded images are loaded.");
+            //         })
+            //         .catch((error) => {
+            //           console.error("An error occurred:", error);
+            //         });
+
+          })
+
+
         }
         // Process the retrieved data
       })
@@ -144,7 +174,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     }
   };
 
-  
+
   var logoutbtn = document.getElementById("logout");
 
   logoutbtn.addEventListener("click", function () {
@@ -186,21 +216,21 @@ if (userAcc && userAcc.acc_type === "blogger") {
   }
 
 
-    // Get Category Data for admin
-    let getAllItemData = async (url) => {
-      try {
-        const snapshot = await get(ref(database, url));
-        // Data snapshot contains the data at the specified location
-        let itemsData = snapshot.val();
-        console.log("Retrieved data:", itemsData);
-        itemsData = Object.values(itemsData);
-        return itemsData;
-      } catch (error) {
-        console.error("Error getting data:", error);
-        alert(error);
-        return false;
-      }
-    };
+  // Get Category Data for admin
+  let getAllItemData = async (url) => {
+    try {
+      const snapshot = await get(ref(database, url));
+      // Data snapshot contains the data at the specified location
+      let itemsData = snapshot.val();
+      console.log("Retrieved data:", itemsData);
+      itemsData = Object.values(itemsData);
+      return itemsData;
+    } catch (error) {
+      console.error("Error getting data:", error);
+      alert(error);
+      return false;
+    }
+  };
 
   // Function to validate the form on submission
   function validateForm(event) {
@@ -222,8 +252,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
       );
     } else {
       clearError(document.getElementById("blogtitle"));
-    }  
-      if (blogcontent.trim() === "") {
+    }
+    if (blogcontent.trim() === "") {
       showError(
         document.getElementById("blogcontent"),
         "blogcontent is required."
@@ -248,24 +278,24 @@ if (userAcc && userAcc.acc_type === "blogger") {
         alert("Refill Form for all Feilds\nSome Feilds are undefined.");
         console.log("Refill Form for all Feilds\nSome Feilds are undefined.");
       } else {
-      // Submit the form or do any other required action here
-      console.log("Form submitted successfully!");
-      // Call the function to create a user with Firebase Authentication
-      var currentDate = new Date();
-      var dateString = currentDate.toISOString().substr(0, 10); // Format as YYYY-MM-DD
-      
-      console.log("Blog Date Append  == ",dateString)
-      console.log("User Id ==== ", userId);
-          writeUserData(userId, blogtitle,blogcontent, dateString)
-            .then(() => {
-                alert("Blog is Successfully Published");
-                window.location.href = "../dashboard/dashboard.html";
-              //
-            })
-            .catch((error) => {
-              console.error("Error Publishing Blog:", error);
-            });
-        
+        // Submit the form or do any other required action here
+        console.log("Form submitted successfully!");
+        // Call the function to create a user with Firebase Authentication
+        var currentDate = new Date();
+        var dateString = currentDate.toISOString().substr(0, 10); // Format as YYYY-MM-DD
+
+        console.log("Blog Date Append  == ", dateString)
+        console.log("User Id ==== ", userId);
+        writeUserData(userId, blogtitle, blogcontent, dateString)
+          .then(() => {
+            alert("Blog is Successfully Published");
+            window.location.href = "../dashboard/dashboard.html";
+            //
+          })
+          .catch((error) => {
+            console.error("Error Publishing Blog:", error);
+          });
+
       }
     }
   }
@@ -273,26 +303,26 @@ if (userAcc && userAcc.acc_type === "blogger") {
   // Attach form validation function to the form's submit event
   signupForm.addEventListener("submit", validateForm);
 
-  let writeUserData = (userId, blogtitle,blogcontent, date) => {
+  let writeUserData = (userId, blogtitle, blogcontent, date) => {
     return new Promise((resolve, reject) => {
-        const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
+      const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
 
-        set(userRef, {
-            userId: userId,
-            blogtitle: blogtitle,
-            blogcontent: blogcontent,
-            blogdate: date
-        })
+      set(userRef, {
+        userId: userId,
+        blogtitle: blogtitle,
+        blogcontent: blogcontent,
+        blogdate: date
+      })
         .then(() => {
-            console.log("Blog saved to Firebase Database.");
-            resolve(); // Resolve the promise to indicate success
+          console.log("Blog saved to Firebase Database.");
+          resolve(); // Resolve the promise to indicate success
         })
         .catch((error) => {
-            console.error("Errori in Blog saving :", error);
-            reject(error); // Reject the promise with the error
+          console.error("Errori in Blog saving :", error);
+          reject(error); // Reject the promise with the error
         });
     });
-}
+  }
 
 } else if (userAcc !== null) {
   console.log("User is already logged In, did not required Login again");
@@ -302,7 +332,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     );
     console.log("User Data ACCType", userAcc);
     window.location.href = "./dashboard.html";
-  }  else {
+  } else {
     window.location.href = "../blogview.html";
     alert(
       "You are Guest User,\n You can read Blogs"

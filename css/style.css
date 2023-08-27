@@ -1443,6 +1443,7 @@ a:hover {
 
 
 /* *********************** New Project CSS ********************** */
+section.main-page,
 section .container-fluid {
     background: #830bce;
 }
@@ -1580,4 +1581,10 @@ section.main-page .main-heading {
     font-size: smaller;
     font-weight: 600;
     color: gray;
+}
+.my-blog{
+    margin-bottom: 50px;
+}
+.my-blog .row {
+    margin: 15px 0px;
 }
