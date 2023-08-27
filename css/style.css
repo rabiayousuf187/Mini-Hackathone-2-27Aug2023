@@ -311,7 +311,7 @@ h3{
 .btn-get-started:hover,
 .btn-get-started:focus,
 .btn-get-started:visited {
-    color: #61B846 !important;
+    color: #573e67 !important;
     background: #FFF !important;
 
 }
@@ -319,6 +319,9 @@ h3{
 /* ****************** End Main Page ******************** */
 
 /* ****************** Signup Page ********************* */
+.Blog .main-page-text{
+    justify-content: center;
+}
 .signup .main-page-content {
     display: block;
     padding: 70px 20px;
@@ -1370,4 +1373,21 @@ p.sub-cat-name {font-size: 16px;}
     }
 
     
+}
+
+
+/* *********************** New Project CSS ********************** */
+section.main-page {
+    background: #830bce;
+}
+
+section.Blog .main-page-text{
+    padding: 45px !important;
+}
+section.main-page .main-heading{
+    color: white;
+    padding-bottom: 45px;
+}
+.btn-get-started {
+    background: #573e67;
 }
