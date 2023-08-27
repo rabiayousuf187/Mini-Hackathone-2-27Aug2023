@@ -9,8 +9,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById("Top").style.display = "block";
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
 
-  let userId = userAcc.id;
-  let imageURL = userAcc.blogimg;
+//   let userId = userAcc.id;
+//   let imageURL = userAcc.blogimg;
   console.log("userAcc ", userAcc);
   let username = `${userAcc.firstname} ${userAcc.lastname} `;
   console.log("userAcc Id", userId);
@@ -37,7 +37,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
       window.location.href = destination;
     });
   };
-  addClickListener('profile' , './profile.html')
+  addClickListener('profile' , './dashboard/profile.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
