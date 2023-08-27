@@ -10,6 +10,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById("adminname").innerText = userAcc.firstname + " "+ userAcc.lastname;
   
   let userId = userAcc.id;
+  let username = `${userAcc.firstname} ${userAcc.lastname} `;
   console.log("userAcc Id", userId);
   // Use the Firebase Configuration functions
   const {
@@ -29,105 +30,97 @@ if (userAcc && userAcc.acc_type === "blogger") {
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
-  window.addEventListener("load", () => {
-    let getCartData = getAllItemData(`cart/${userAcc.id}/`);
 
-    getAllItemData(`items/fruit/`)
-      .then((itemsData) => {
-        if (!itemsData) {
+  let showItem = (
+    container,
+    ind,
+    category,
+    name,
+    weight,
+    price,
+    imageURL,
+    description,
+    disabled
+  ) => {
+    category = capitalizeWords(category);
+    let link = replaceSpacesWithHyphens(category);
+    const itemHTML = `<div class="row">
+    <div class="title">
+        <div class="blog-details">
+            <div class="blogger-img">
+                <img src="../../img/placeholder.png"/>
+            </div>
+            <div class="blog-title">
+                <h3 id="blog-title">Title 01kjdflkjf</h3>
+                <div class="user-details">
+                    <p id="username">Uer Name - </p> 
+                    <p id="date">Uer Name - </p> 
+                </div>
+            </div>
+        </div>
+        <div class="blog-content">
+            <p id="blog-content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, porro ea, sint omnis et dolore est quam quaerat, aut commodi beatae. Asperiores assumenda earum illum facilis totam harum magni saepe. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi qui harum aspernatur alias dolores quas vel praesentium sed saepe ad eaque unde voluptatibus officia possimus id, a inventore amet beatae!
+            </p>
+        </div>
+    </div>
+</div>`;
+
+    container.insertAdjacentHTML("beforeend", itemHTML);
+
+    // container.addEventListener("click", function (event) {
+    //   let link;
+    //   console.log(
+    //     "Button pressed",
+    //     event,
+    //     event.target.querySelector("i"),
+    //     event.target.tagName
+    //   );
+    //   if (
+    //     event.target.tagName === "BUTTON" &&
+    //     event.target.getAttribute("disabled") === false
+    //   ) {
+    //     link = event.target.getAttribute("id");
+    //     console.log(
+    //       "Show Items of ====",
+    //       link,
+    //       event.target.getAttribute("disabled")
+    //     );
+    //     console.log("Button selected");
+    //   } else if (
+    //     event.target.tagName === "I" &&
+    //     event.target.closest("BUTTON").getAttribute("disabled") === false
+    //   ) {
+    //     console.log("Icon selected");
+    //     link = event.target.closest("BUTTON").getAttribute("id");
+    //   } else {
+    //     console.log("not a target element");
+    //   }
+
+    //   addCart(selectedCategory, link);
+    // });
+  };
+
+  window.addEventListener("load", () => {
+    // ref(database, 'blogs/' + userId + `/${blogtitle}`)
+    getAllItemData(`blogs/${userId}/`)
+      .then((blogData) => {
+        if (!blogData) {
           console.log("Data is null");
         } else {
           // Here you can continue with rendering your data or performing other tasks
-          console.log("updated into Array ====:", itemsData);
-          selectedCategory = "fruit";
-          const container = document.getElementById("show-item-inner");
-          getSelectedItemData(`cart/${userAcc.id}/`)
-            .then((cartData) => {
-              console.log(`GET CART DATA ==`, cartData);
-              disableItem = Object.keys(cartData);
+          console.log("updated into Array ====:", blogData);
 
-              console.log("CART KEY ==== ", disableItem);
-
-              console.log("disableItem ==== ", disableItem);
-              itemsData.forEach((ele, ind) => {
-                const matchExists = disableItem.some(
-                  (item) => item.toLowerCase() === ele.itemName.toLowerCase()
-                );
-
-                if (matchExists) {
-                  console.log(`${ele.itemName} found in the itemData.`);
-                  // Call the function to add a fruit item
-                  // name, weight, price, imageURL
-                  showItem(
-                    container,
-                    ind,
-                    ele.itemCategory,
-                    ele.itemName,
-                    ele.unitName,
-                    ele.unitPrice,
-                    ele.imageUrl,
-                    ele.itemContent,
-                    true
-                  );
-                } else {
-                  showItem(
-                    container,
-                    ind,
-                    ele.itemCategory,
-                    ele.itemName,
-                    ele.unitName,
-                    ele.unitPrice,
-                    ele.imageUrl,
-                    ele.itemContent,
-                    false
-                  );
-                  console.log(`${ele.itemName} not found in the array.`);
-                }
-                // console.log("Each Item ==== :", ele);
-                console.log(
-                  "Each Item ==== :",
-                  ele.itemCategory,
-                  ele.itemName,
-                  ele.unitName,
-                  ele.unitPrice,
-                  ele.imageUrl
-                );
-
-                // const found = array.includes(searchString);
-
-                const lazyImages = document.querySelectorAll(".lazy-image");
-                const loadImagePromises = [];
-                lazyImages.forEach((img) => {
-                  const promise = new Promise((resolve) => {
-                    img.addEventListener("load", () => {
-                      resolve();
-                    });
-                    img.src = img.getAttribute("data-src");
-                  });
-                  loadImagePromises.push(promise);
-                });
-                Promise.all(loadImagePromises)
-                  .then(() => {
-                    console.log("All lazy-loaded images are loaded.");
-                  })
-                  .catch((error) => {
-                    console.error("An error occurred:", error);
-                  });
-              });
-
-              const inactive = document.querySelectorAll(".cat-row");
-
-              inactive.forEach((div) => {
-                console.log("check DIv === ", div);
-                if (div.hasAttribute("disabled")) {
-                  div.classList.add("disable");
-                  console.log("disable DIv === ", div);
-                }
-              });
-            })
-            .catch((error) => {
-              console.error("Error Getting Cart Items Data:", error);
-            });
+          const container = document.getElementById("blog-container");
+          itemsData.forEach((ele, ind) => {
+          showItem = (
+            container,
+            ind, username, 
+            ele.date,
+            ele.blogtitle,
+            ele.blogcontent,
+          )
+          }
         }
         // Process the retrieved data
       })
@@ -194,9 +187,9 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
 
     // Get Category Data for admin
-    let getAllItemData = async () => {
+    let getAllItemData = async (url) => {
       try {
-        const snapshot = await get(ref(database, `categories/`));
+        const snapshot = await get(ref(database, url));
         // Data snapshot contains the data at the specified location
         let itemsData = snapshot.val();
         console.log("Retrieved data:", itemsData);
