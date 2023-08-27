@@ -144,23 +144,24 @@ if (userAcc === null || userAcc === undefined) {
               if (userData) {
                 userAcc = {
                   id: userid,
-                  fullname: userData.fullname,
+                  firstname: userData.firstname,
+                  lastname: userData.lastname,
                   acc_type: userData.acc_type,
                 };
                 // Data exists for the user ID
                 console.log("User Data", userData);
                 console.log("User Data ACCType", userData.acc_type);
-                getAllItemData().then((category) => {
-                  console.log("Retrieved data:", category);
-                  localStorage.setItem(
-                    "category",
-                    JSON.stringify(Object.values(category))
-                  );
+                // getAllItemData().then((category) => {
+                //   console.log("Retrieved data:", category);
+                //   localStorage.setItem(
+                //     "category",
+                //     JSON.stringify(Object.values(category))
+                //   );
                   
-                });
-                if (userData.acc_type === "user") {
+                // });
+                // if (userData.acc_type === "blogger") {
                   alert(
-                    "User logged in Successfully!\nYou are redirected to User Purchase Corner"
+                    "User logged in Successfully!\nYou are redirected to Dashboard Corner"
                   );
                   console.log("User Data ACCType", userAcc);
                   localStorage.setItem("userAcc", JSON.stringify(userAcc));
@@ -168,21 +169,22 @@ if (userAcc === null || userAcc === undefined) {
                   console.log(
                     "Category Data successfully Stored in local Storage"
                   );
-                  window.location.href = "../purchase/purchase.html";
-                } else if (userData.acc_type === "admin") {
-                  console.log("User Data ACCType", userAcc);
-                  localStorage.setItem("userAcc", JSON.stringify(userAcc));
-                  localStorage.setItem("isAdminFirstLoad", "true");
-                  console.log(
-                    "Category Data successfully Stored in local Storage"
-                  );
-                  window.location.href = "../admin/admin.html";
-                  alert(
-                    "User logged in Successfully!\nYou are redirected to Admin Corner"
-                  );
-                } else {
-                  alert("Invalid Credential!");
-                }
+                  window.location.href = "../dashboard/dashboard.html";
+                // } 
+                //else if (userData.acc_type === "admin") {
+                //   console.log("User Data ACCType", userAcc);
+                //   localStorage.setItem("userAcc", JSON.stringify(userAcc));
+                //   localStorage.setItem("isAdminFirstLoad", "true");
+                //   console.log(
+                //     "Category Data successfully Stored in local Storage"
+                //   );
+                //   window.location.href = "../admin/admin.html";
+                //   alert(
+                //     "User logged in Successfully!\nYou are redirected to Admin Corner"
+                //   );
+                // } else {
+                //   alert("Invalid Credential!");
+                // }
               } else {
                 alert("Invalid Credential!");
               }
@@ -211,22 +213,22 @@ if (userAcc === null || userAcc === undefined) {
   });
 } else if (userAcc !== null) {
   console.log("User is already logged In, did not required Login again");
-  if (userAcc.acc_type === "user") {
+  if (userAcc.acc_type === "blogger") {
     alert(
-      "User logged in Successfully!\nYou are redirected to User Purchase Corner"
+      "User logged in Successfully!\nYou are redirected to Dashboard"
     );
     console.log("User Data ACCType", userAcc);
-    window.location.href = "../purchase/purchase.html";
-  } else if (userAcc.acc_type === "admin") {
-    console.log("User Data ACCType", userAcc);
-    window.location.href = "../admin/admin.html";
+    window.location.href = "../dashboard/dashboard.html";
+  }  else {
+    window.location.href = "../blogview.html";
     alert(
-      "User is already logged In, did not required Login again\nYou are redirected to Admin Corner"
+      "You are Guest User,\n You can read Blogs"
     );
-  } else {
-    alert("Invalid Credential!");
+    // alert("Invalid Credential!");
   }
 } else {
-  console.log("Unauth User Access!");
-  alert("Unauth User Access!");
+  window.location.href = "../blogview.html";
+  alert(
+    "You are Guest User,\n You can read Blogs"
+  );
 }

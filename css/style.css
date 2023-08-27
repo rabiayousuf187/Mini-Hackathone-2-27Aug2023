@@ -1381,7 +1381,7 @@ p.sub-cat-name {font-size: 16px;}
 
 
 /* *********************** New Project CSS ********************** */
-section.main-page {
+section .container-fluid {
     background: #830bce;
 }
 
@@ -1400,7 +1400,7 @@ section.main-page .main-heading{
     background: #830bce;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .top-header{
     padding: 30px 10px;
@@ -1415,7 +1415,13 @@ section.main-page .main-heading{
     color: white;
     font-weight: 500;
 }
-
+.header2{
+    background-color: white;
+}
+.signup .main-page-content {
+    display: block;
+    padding: 0px;
+}
 .signup .form input, .signup .form .inp-icon {
     /* border: none; */
     border-radius: 5px;

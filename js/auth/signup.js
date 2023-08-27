@@ -26,8 +26,8 @@ if (userAcc === null || userAcc === undefined) {
   // It should have at least one character after the last "." symbol.
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  const contactRegex = /^\d{11}$/;
-  const fullnameRegex = /^[A-Za-z\s]+$/;
+  // const contactRegex = /^\d{11}$/;
+  const nameRegex = /^[A-Za-z\s]+$/;
 
   // Function to display error message for an input field
   function showError(inputElement, errorMessage) {
@@ -77,52 +77,56 @@ if (userAcc === null || userAcc === undefined) {
   function validateForm(event) {
     event.preventDefault();
 
-    const fullname = document.getElementById("fullname").value;
-    const username = document.getElementById("username").value;
+    const firstname = document.getElementById("firstname").value;
+    const lastname = document.getElementById("lastname").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const contact = document.getElementById("contact").value;
-    let acc_type, userAcc;
+    const repassword = document.getElementById("repassword").value;
+    let acc_type  = "blogger", userAcc;
     // let acc_type = document.querySelector('input[name="acc_type"]:checked');
 
-    console.log("fullname = ", fullname);
-    console.log("username = ", username);
+    console.log("firstname = ", firstname);
+    console.log("lastname = ", lastname);
     console.log("email = ", email);
     console.log("password = ", password);
-    console.log("contact = ", contact);
+    console.log("repassword = ", repassword);
 
-    // Validate fullname
-    if (fullname.trim() === "") {
-      showError(document.getElementById("fullname"), "fullname is required.");
-    } else if (!fullnameRegex.test(fullname.trim())) {
+    // Validate firstname
+    if (firstname.trim() === "") {
+      showError(document.getElementById("firstname"), "firstname is required.");
+    } else if (!nameRegex.test(firstname.trim())) {
       console.log("Invalid: Contains only letters and spaces.");
-      showError(document.getElementById("fullname"), "Invalid: Contains only letters and spaces.");
+      showError(document.getElementById("firstname"), "Invalid: Contains only letters and spaces.");
     } else {
       console.log("Valid: Contains only letters and spaces.");
-      clearError(document.getElementById("fullname"));
+      clearError(document.getElementById("firstname"));
+    } 
+       // Validate firstname
+    if (lastname.trim() === "") {
+      showError(document.getElementById("lastname"), "lastname is required.");
+    } else if (!nameRegex.test(lastname.trim())) {
+      console.log("Invalid: Contains only letters and spaces.");
+      showError(document.getElementById("lastname"), "Invalid: Contains only letters and spaces.");
+    } else {
+      console.log("Valid: Contains only letters and spaces.");
+      clearError(document.getElementById("lastname"));
+    }
+     if (repassword.trim() === "" ) {
+      showError(document.getElementById("repassword"), "repassword is required.");
+    } else if (!passwordRegex.test(repassword.trim())) {
+      console.log("Invalid: Password");
+      showError(document.getElementById("repassword"), "Invalid: rePassword.");
+    }else if ( password != repassword) {
+      console.log("RePassword is not match");
+      console.log("RePassword ==", repassword);
+      console.log("Password ==", password);
+      showError(document.getElementById("repassword"), "Invalid: rePassword.");
+    } else {
+      console.log("Valid:  Password");
+      clearError(document.getElementById("repassword"));
     }
   
-    // Validate username
-    if (username.trim() === "") {
-      showError(document.getElementById("username"), "Username is required.");
-    } else {
-      clearError(document.getElementById("username"));
-    }
 
-    // Validate contact
-    const contactInput = contact.trim();
-    if (!contactRegex.test(contactInput)) {
-      console.log("Contact must be exactly 11 digits.");
-      showError(
-        document.getElementById("contact"),
-        "Contact must be exactly 11 digits."
-      );
-    } else if (contactInput === "") {
-      console.log("Contact is required.");
-      showError(document.getElementById("contact"), "Contact is required.");
-    } else {
-      clearError(document.getElementById("contact"));
-    }
 
     // Validate emailconsole.log("Email Value on change ==", )
     if (email.trim() === "") {
@@ -146,12 +150,12 @@ if (userAcc === null || userAcc === undefined) {
     }
 
  
-    if (username.includes("admin")) {
-      console.log("Substring found!");
-      acc_type = "admin";
-    } else {
-      acc_type = "user";
-    }
+    // if (username.includes("admin")) {
+    //   console.log("Substring found!");
+    //   acc_type = "admin";
+    // } else {
+    //   acc_type = "user";
+    // }
 
     console.log(
       "!document.querySelector.error ==== ",
@@ -162,6 +166,16 @@ if (userAcc === null || userAcc === undefined) {
       !document.querySelector(".error")
     );
     if (!document.querySelector(".error")) {
+      if (
+        !firstname ||
+        !lastname ||
+        !email ||
+        !password ||
+        !repassword
+      ) {
+        alert("Refill Form for all Feilds\nSome Feilds are undefined.");
+        console.log("Refill Form for all Feilds\nSome Feilds are undefined.");
+      } else {
       // Submit the form or do any other required action here
       console.log("Form submitted successfully!");
       // Call the function to create a user with Firebase Authentication
@@ -171,34 +185,35 @@ if (userAcc === null || userAcc === undefined) {
           const user = userCredential.user;
           console.log("User Role", acc_type);
           console.log("User Created", user);
-          writeUserData(user.uid, fullname, username, email, password, contact, acc_type)
+          writeUserData(user.uid, firstname,lastname, email, password,  acc_type)
             .then(() => {
               userAcc = {
                 userId: user.uid,
-                fullname: fullname,
+                firstname: firstname,
+                lastname: lastname,
                 acc_type: acc_type,
               };
               localStorage.setItem("userAcc", JSON.stringify(userAcc));
 
-              getAllItemData().then((category) => {
-                console.log("Retrieved data:", category);
-                localStorage.setItem(
-                  "category",
-                  JSON.stringify(Object.values(category))
-                );
+              // getAllItemData().then((category) => {
+              //   console.log("Retrieved data:", category);
+              //   localStorage.setItem(
+              //     "category",
+              //     JSON.stringify(Object.values(category))
+              //   );
                 
-              });
-              if (acc_type === "user") {
+              // });
+              if (acc_type === "blogger") {
                 localStorage.setItem("isUserFirstLoad", "true");
-                alert("You are redirected to User Purchase Corner");
-                window.location.href = "../purchase/purchase.html";
-              } else if (acc_type === "admin") {
-                console.log("User Data ACCType", acc_type);
-                localStorage.setItem("isAdminFirstLoad", "true");
-                alert("You are redirected to Admin Corner");
-                window.location.href = "../admin/admin.html";
-              } else {
-                alert("Invalid Credential!");
+                alert("You are redirected to User DashBoard Corner");
+                window.location.href = "../dashboard/dashboard.html";
+              // } else if (acc_type === "admin") {
+              //   console.log("User Data ACCType", acc_type);
+              //   localStorage.setItem("isAdminFirstLoad", "true");
+              //   alert("You are redirected to Admin Corner");
+              //   window.location.href = "../admin/admin.html";
+              // } else {
+                // alert("Invalid Credential!");
               }
             })
             .catch((error) => {
@@ -208,25 +223,26 @@ if (userAcc === null || userAcc === undefined) {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          alert(error);
           console.log(error, error.message, error.code);
         });
+      }
     }
   }
 
   // Attach form validation function to the form's submit event
   signupForm.addEventListener("submit", validateForm);
 
-  let writeUserData = (userId, fullname, username, email, password, contact, acc_type) => {
+  let writeUserData = (userId, firstname, lastname, email, password, acc_type) => {
     return new Promise((resolve, reject) => {
         const userRef = ref(database, 'users/' + userId);
 
         set(userRef, {
             userId: userId,
-            fullname: fullname,
-            username: username,
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             password: password,
-            contact: contact,
             acc_type: acc_type
         })
         .then(() => {
@@ -248,21 +264,23 @@ if (userAcc === null || userAcc === undefined) {
   });
 
 }else if (userAcc !== null) {
-  console.log("User is already logged In, did not required Create again");
-  if (userAcc.acc_type === "user") {
+  console.log("User is already logged In, did not required Login again");
+  if (userAcc.acc_type === "blogger") {
     alert(
-      "User logged in Successfully!\nYou are redirected to User Purchase Corner"
+      "User logged in Successfully!\nYou are redirected to Dashboard"
     );
     console.log("User Data ACCType", userAcc);
-    window.location.href = "../purchase/purchase.html";
-  } else if (userAcc.acc_type === "admin") {
-    console.log("User Data ACCType", userAcc);
-    window.location.href = "../admin/admin.html";
-    alert("User is already logged In, did not required Create again!\nYou are redirected to Admin Corner");
-  } else {
-    alert("Invalid Credential!");
+    window.location.href = "../dashboard/dashboard.html";
+  }  else {
+    window.location.href = "../blogview.html";
+    alert(
+      "You are Guest User,\n You can read Blogs"
+    );
+    // alert("Invalid Credential!");
   }
 } else {
-  console.log("Unauth User Access!");
-  alert("Unauth User Access!");
+  window.location.href = "../blogview.html";
+  alert(
+    "You are Guest User,\n You can read Blogs"
+  );
 }
