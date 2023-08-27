@@ -1415,3 +1415,14 @@ section.main-page .main-heading{
     color: white;
     font-weight: 500;
 }
+
+.signup .form input, .signup .form .inp-icon {
+    /* border: none; */
+    border-radius: 5px;
+    margin: 4px;
+    border: 2px solid #D4D3D3;
+}
+.signup .form input:focus {
+    border: 2px solid #830bce;
+    box-shadow: 0 0 0 0.25rem rgb(131 11 206 / 34%) !important;
+}
