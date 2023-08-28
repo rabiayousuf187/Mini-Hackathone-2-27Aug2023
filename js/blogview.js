@@ -74,9 +74,13 @@ if (userAcc && userAcc.acc_type === "blogger") {
             </div>
         </div>
         <div class="blog-content">
-            <p id="userId">
-                ${blogcontent}</p>
+          <p id="blog-content">
+          ${blogcontent}</p>
         </div>
+        <div class="blog-content">
+        <a id="delete" href
+        ="#" style="color = lightpurple;" >See all from this user</a>
+    </div>
     </div>
 </div>`;
 
@@ -133,7 +137,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
             
                   // Render BLogsss
-                  Object.values(blog).forEach((ele, ind) => {
+                  Object.values(blog).forEach((ele) => {
                     console.log("Blog INside == ", ele)
                     
                     showItem(
