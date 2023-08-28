@@ -1607,10 +1607,11 @@ section.main-page .main-heading {
 }
 .top-header.all-blog {
     background: #4b0577;
-    padding: 6px;
+    padding: 6px 14px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin: auto;
 }
 .top-header.all-blog a{
 color: yellow;

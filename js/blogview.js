@@ -39,7 +39,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     });
   };
   addClickListener('profile' , './dashboard/profile.html')
-  addClickListener('all-blog' , '/blogview.html')
+  // addClickListener('all-blog' , '/blogview.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //

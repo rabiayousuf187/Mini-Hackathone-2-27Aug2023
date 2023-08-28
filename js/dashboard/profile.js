@@ -33,6 +33,15 @@ if (userAcc && userAcc.acc_type === "blogger") {
     // Check if the page has been loaded before
     const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
     //
+
+    const addClickListener = (elementId, destination) => {
+        const element = document.getElementById(elementId);
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.location.href = destination;
+        });
+      };
+      addClickListener('all-blog' , '../blogview.html')
     window.addEventListener("load", () => {
         // ref(database, 'blogs/' + userId + `/${blogtitle}`)
         getAllItemData(`users/${userId}/`)
