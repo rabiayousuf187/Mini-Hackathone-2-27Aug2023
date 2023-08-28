@@ -52,7 +52,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
   let showItem = (
     container,
-    ind, username,
+    userId, username,
     date,
     blogtitle,
     blogcontent, imageURL
@@ -74,13 +74,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
             </div>
         </div>
         <div class="blog-content">
-            <p id="blog-content">
+            <p id="userId">
                 ${blogcontent}</p>
-        </div>
-        <div class="blog-content">
-            <a id="delete" href
-            ="#" >Delete</a>
-            <a id="edit" href ="#">Edit</a>
         </div>
     </div>
 </div>`;
@@ -106,45 +101,89 @@ if (userAcc && userAcc.acc_type === "blogger") {
           console.log("Blog data into Array ====:", blogData);
           console.log("updated into Array ====:", userData);
 
-            // userAcc.blogimg == null? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
-
             
             const container = document.getElementById("blog-container");
-            userData.forEach((ele, ind) => {
-                    Object.values(blogData).find((user)=>{
-                    if(userData[user].id === ele.userId){
-                        username = `${userData.firstname} ${userData.lastname}`
-
-                        console.log(container,
-                            ind, username,
-                            user.blogdate,
-                            user.blogtitle,
-                            user.blogcontent,
-                            ele.imageURL);
-                        // container,
-                        //     ind, username,
-                        //     ele.blogdate,
-                        //     ele.blogtitle,
-                        //     ele.blogcontent,
-                        //     imageURL
-                        showItem(
-                                container,
-                                ind, username,
-                                user.blogdate,
-                                user.blogtitle,
-                                user.blogcontent,
-                                ele.imageURL
-                              );
-                    }
-                    else{
-                        
-          console.log("Not found");
-                    }
-
-                })
-                })
+          //   const data = {
+          //     ABC: {
+          //         innerObj: {
+          //             key: "red"
+          //         }
+          //     },
+          //     DEE: {
+          //         innerObj: {
+          //             key: "red"
+          //         }
+          //     },
+          //     ghy: {
+          //         innerObj: {
+          //             key: "red"
+          //         }
+          //     }
+          // };
+            for (const outerKey in userData) {
+              if (blogData.hasOwnProperty(outerKey)) {
+                  // Access the 'key' property within the 'innerObj'
+                  let user = userData[outerKey];
+                  let imageURL = userData[outerKey].blogimg;
+                  let userId = outerKey;
+                  let blog = blogData[outerKey];
+                  console.log("outerKey === ", userId, user, blog);
             
-            }
+                  imageURL == null? imageURL = "../img/profile.png" : imageURL = userAcc.blogimg
+
+            
+                  // Render BLogsss
+                  Object.values(blog).forEach((ele, ind) => {
+                    console.log("Blog INside == ", ele)
+                    
+                    showItem(
+                      container,
+                      userId, username,
+                      ele.blogdate,
+                      ele.blogtitle,
+                      ele.blogcontent,
+                      imageURL
+                    );
+                  });
+                }
+
+                  
+              }
+          }
+          //   Object.values(userData).forEach((ele, ind) => {
+          //           blogData.find((user)=>{
+          //           // Object.values(blogData).find((user)=>{
+          //           if(userData[user].id === ele.userId){
+          //               username = `${userData.firstname} ${userData.lastname}`
+
+          //               console.log(container,
+          //                   ind, username,
+          //                   user.blogdate,
+          //                   user.blogtitle,
+          //                   user.blogcontent,
+          //                   ele.imageURL);
+          //               // container,
+          //               //     ind, username,
+          //               //     ele.blogdate,
+          //               //     ele.blogtitle,
+          //               //     ele.blogcontent,
+          //               //     imageURL
+          //               showItem(
+          //                       container,
+          //                       ind, username,
+          //                       user.blogdate,
+          //                       user.blogtitle,
+          //                       user.blogcontent,
+          //                       ele.imageURL
+          //                     );
+          //           }
+          //           else{
+                        
+          // console.log("Not found");
+          //           }
+
+          //       })
+                // })
             })
             
       .catch((error) => {
@@ -195,7 +234,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
       // Data snapshot contains the data at the specified location
       let itemsData = snapshot.val();
       console.log("Retrieved data:", itemsData);
-    //   itemsData = Object.values(itemsData);
+      // itemsData = Object.values(itemsData);
       return itemsData;
     } catch (error) {
       console.error("Error getting data:", error);
