@@ -35,11 +35,13 @@ if (userAcc && userAcc.acc_type === "blogger") {
     const element = document.getElementById(elementId);
     element.addEventListener("click", (event) => {
       event.preventDefault();
+      localStorage.removeItem('AllBlog');
       window.location.href = destination;
     });
   };
   addClickListener('profile' , './dashboard/profile.html')
-  // addClickListener('all-blog' , '/blogview.html')
+  addClickListener('dashboard' , './dashboard/dashboard.html')
+ 
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
@@ -49,6 +51,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     });
   };
  
+
 
   let showItem = (
     container,
@@ -63,7 +66,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     <div class="title">
         <div class="blog-details">
             <div class="blogger-img">
-                <img src="${imageURL}" alt="user" data-src="${imageURL}" class="lazy-image"/>
+                <img src="../img/profile.png" alt="user" data-src="${imageURL}" class="lazy-image"/>
             </div>
             <div class="blog-title">
                 <h3 id="blog-title">${blogtitle}</h3>
@@ -78,14 +81,35 @@ if (userAcc && userAcc.acc_type === "blogger") {
           ${blogcontent}</p>
         </div>
         <div class="blog-content">
-        <a id="delete" href
-        ="#" style="color = lightpurple;" >See all from this user</a>
+        <a id="${userId}" href="#" style="color: #830bcee6;
+        font-size: medium;font-weight: 500;" >See all from this user</a>
     </div>
     </div>
 </div>`;
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
+    container.addEventListener("click", function (event) {
+      let link;
+      console.log(
+        "Button pressed",
+        event,
+        event.target.querySelector("i"),
+        event.target.tagName
+      );
+      if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
+        console.log("Icon selected");
+        link = event.target.getAttribute('id');
+        console.log("single user BLog Show === ",link);
+
+        localStorage.setItem("singleuser" , link);
+        window.location.href = "../pages/singleuser.html";
+      } else {
+        console.log("not a target element");
+      }
+
+      // addCart(selectedCategory, link);
+    })
     
   };
 
@@ -148,11 +172,36 @@ if (userAcc && userAcc.acc_type === "blogger") {
                       ele.blogcontent,
                       imageURL
                     );
+
+                    
                   });
                 }
 
-                  
+                const lazyImages = document.querySelectorAll(".lazy-image");
+                console.log("LAzy images ==== ", lazyImages)
+                    const loadImagePromises = [];
+                    lazyImages.forEach((img) => {
+                      const promise = new Promise((resolve) => {
+                        img.addEventListener("load", () => {
+                          resolve();
+                        });
+                        console.log("img.src  ===", img.src)
+                        setTimeout( ()=>{
+                          img.src = img.getAttribute("data-src");
+
+                        } , 300);
+                      });
+                      loadImagePromises.push(promise);
+                    });
+                    Promise.all(loadImagePromises)
+                      .then(() => {
+                        console.log("All lazy-loaded images are loaded.");
+                      })
+                      .catch((error) => {
+                        console.error("An error occurred:", error);
+                      });
               }
+              
           }
           //   Object.values(userData).forEach((ele, ind) => {
           //           blogData.find((user)=>{

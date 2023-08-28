@@ -3,13 +3,14 @@ import firebaseExports from "../config/firebase-config.js";
 let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
+document.getElementById("Top").style.display = "block";
+window.
 if (userAcc && userAcc.acc_type === "blogger") {
 
   console.log("Dashboard Page")
-  document.getElementById("Top").style.display = "block";
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
 
-  let userId = userAcc.id;
+  let userId = localStorage.getItem("singleuser");
   let imageURL = userAcc.blogimg;
   console.log("userAcc ", userAcc);
   let username = `${userAcc.firstname} ${userAcc.lastname} `;
@@ -47,23 +48,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
       return match.toUpperCase();
     });
   };
-  let deleteBlog = (userId, id) =>{
-    return new Promise((resolve, reject) => {
-      const userRef = ref(database, 'blogs/' + userId + `/${id}`);
-
-      remove(userRef)
-        .then(() => {
-          console.log("Blog Removed to Firebase Database.");
-          alert("Blog Removed to Firebase Database.");
-          location.reload();
-          resolve(); // Resolve the promise to indicate success
-        })
-        .catch((error) => {
-          console.error("Error in  Removeing :", error);
-          reject(error); // Reject the promise with the error
-        });
-    });
-  }
 
   let showItem = (
     container,
@@ -213,7 +197,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
   logoutbtn.addEventListener("click", function () {
 
-    console.log("Logout");laz
+    console.log("Logout");
     setTimeout(() => {
       logout();
     }, 1000);
@@ -358,24 +342,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
     });
   }
 
-} else if (userAcc !== null) {
-  console.log("User is already logged In, did not required Login again");
-  if (userAcc.acc_type === "blogger") {
-    alert(
-      "User logged in Successfully!\nYou are redirected to Dashboard"
-    );
-    console.log("User Data ACCType", userAcc);
-    window.location.href = "./dashboard.html";
-  } else {
-    window.location.href = "../blogview.html";
-    alert(
-      "You are Guest User,\n You can read Blogs"
-    );
-    // alert("Invalid Credential!");
-  }
 } else {
-  window.location.href = "../blogview.html";
-  alert(
-    "You are Guest User,\n You can read Blogs"
-  );
-}
+    console.log("Any User Can View Blogs");
+    document.getElementById("adminname").innerText = "Guest";
+  } 
