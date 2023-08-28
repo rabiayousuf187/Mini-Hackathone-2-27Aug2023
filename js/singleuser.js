@@ -4,17 +4,32 @@ let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
 document.getElementById("Top").style.display = "block";
-window.
-if (userAcc && userAcc.acc_type === "blogger") {
+window.addEventListener("load", () => {
 
-  console.log("Dashboard Page")
-  document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
+  console.log("Single Blog Page")
+
+  // Get Category Data for admin
+  let getAllItemData = async (url) => {
+    try {
+      const snapshot = await get(ref(database, url));
+      // Data snapshot contains the data at the specified location
+      let itemsData = snapshot.val();
+      console.log("Retrieved data:", itemsData);
+      itemsData = Object.values(itemsData);
+      return itemsData;
+    } catch (error) {
+      console.error("Error getting data:", error);
+      alert(error);
+      return false;
+    }
+  };
 
   let userId = localStorage.getItem("singleuser");
   let imageURL = userAcc.blogimg;
   console.log("userAcc ", userAcc);
   let username = `${userAcc.firstname} ${userAcc.lastname} `;
   console.log("userAcc Id", userId);
+
   // Use the Firebase Configuration functions
   const {
     database,
@@ -27,6 +42,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
     uploadBytes,
     getDownloadURL,
   } = firebaseExports;
+
+  
   const showElement = (elementId, display = "block") => {
     document.getElementById(elementId).style.display = display;
   };
@@ -38,7 +55,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
       window.location.href = destination;
     });
   };
-  addClickListener('profile' , './profile.html')
+
   addClickListener('all-blog' , '../blogview.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
@@ -86,39 +103,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
-    container.addEventListener("click", function (event) {
-      let link;
-      console.log(
-        "Button pressed",
-        event,
-        event.target.querySelector("i"),
-        event.target.tagName
-      );
-      if (
-        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'delete'
-      ) {
-        console.log("Icon selected");
-        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
-        console.log("Delete link === ",link);
-
-        deleteBlog(userId,link)
-      } else if (
-        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
-      ) {
-        console.log("Icon selected");
-        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
-        console.log("Edit link === ",link);
-        alert("Could not Edit Yet")
-        // editeBlog(userId,link)
-      }else {
-        console.log("not a target element");
-      }
-
-      // addCart(selectedCategory, link);
-    });
   };
 
-  window.addEventListener("load", () => {
     // ref(database, 'blogs/' + userId + `/${blogtitle}`)
     getAllItemData(`blogs/${userId}/`)
       .then((blogData) => {
@@ -178,21 +164,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
       });
   });
 
-  let getSelectedItemData = async (url) => {
-    try {
-      let snapshot = await get(ref(database, url));
-      // Data snapshot contains the data at the specified location
-      let itemsData = snapshot.val();
-      console.log("Retrieved data:", itemsData);
-      // itemsData = Object.values(itemsData);
-      return itemsData;
-    } catch (error) {
-      console.error("Error getting data:", error);
-      return false;
-    }
-  };
-
-
   var logoutbtn = document.getElementById("logout");
 
   logoutbtn.addEventListener("click", function () {
@@ -203,146 +174,29 @@ if (userAcc && userAcc.acc_type === "blogger") {
     }, 1000);
   });
 
-  const signupForm = document.getElementById("signup-form");
 
-
-  // Function to display error message for an input field
-  function showError(inputElement, errorMessage) {
-    const errorElement = document.getElementById(inputElement.id + "Error");
-    errorElement.textContent = errorMessage;
-
-    // Add the .error class to the input element
-    errorElement.classList.add("error");
-    console.log(
-      " inputElement.classList.add('error') = ",
-      errorElement,
-      errorElement.classList.add("error")
-    );
-  }
-
-  // Function to clear error message for an input field
-  function clearError(inputElement) {
-    const errorElement = document.getElementById(inputElement.id + "Error");
-    errorElement.textContent = "";
-
-    // Remove the .error class from the input element
-    errorElement.classList.remove("error");
-    console.log(
-      "inputElement.classList.remove('error'); = ",
-      errorElement.classList.remove("error")
-    );
-  }
-
-
-  // Get Category Data for admin
-  let getAllItemData = async (url) => {
-    try {
-      const snapshot = await get(ref(database, url));
-      // Data snapshot contains the data at the specified location
-      let itemsData = snapshot.val();
-      console.log("Retrieved data:", itemsData);
-      itemsData = Object.values(itemsData);
-      return itemsData;
-    } catch (error) {
-      console.error("Error getting data:", error);
-      alert(error);
-      return false;
-    }
-  };
-
-  // Function to validate the form on submission
-  function validateForm(event) {
-    event.preventDefault();
-
-    const blogtitle = document.getElementById("blogtitle").value;
-    const blogcontent = document.getElementById("blogcontent").value;
-
-    let acc_type, userAcc;
-    // let acc_type = document.querySelector('input[name="acc_type"]:checked');
-
-    console.log("blogtitle = ", blogtitle);
-    console.log("blogcontent = ", blogcontent);
-
-    if (blogtitle.trim() === "") {
-      showError(
-        document.getElementById("blogtitle"),
-        "blogtitle is required."
-      );
-    } else {
-      clearError(document.getElementById("blogtitle"));
-    }
-    if (blogcontent.trim() === "") {
-      showError(
-        document.getElementById("blogcontent"),
-        "blogcontent is required."
-      );
-    } else {
-      clearError(document.getElementById("blogcontent"));
-    }
-
-    console.log(
-      "!document.querySelector.error ==== ",
-      document.querySelector("#signup-form")
-    );
-    console.log(
-      "!document.querySelector.error ==== ",
-      !document.querySelector(".error")
-    );
-    if (!document.querySelector(".error")) {
-      if (
-        !blogtitle ||
-        !blogcontent
-      ) {
-        alert("Refill Form for all Feilds\nSome Feilds are undefined.");
-        console.log("Refill Form for all Feilds\nSome Feilds are undefined.");
-      } else {
-        // Submit the form or do any other required action here
-        console.log("Form submitted successfully!");
-        // Call the function to create a user with Firebase Authentication
-        var currentDate = new Date();
-        var dateString = currentDate.toISOString().substr(0, 10); // Format as YYYY-MM-DD
-
-        console.log("Blog Date Append  == ", dateString)
-        console.log("User Id ==== ", userId);
-        writeUserData(userId, blogtitle, blogcontent, dateString)
-          .then(() => {
-            alert("Blog is Successfully Published");
-            window.location.href = "../dashboard/dashboard.html";
-            //
-          })
-          .catch((error) => {
-            console.error("Error Publishing Blog:", error);
-          });
-
-      }
-    }
-  }
-
-  // Attach form validation function to the form's submit event
-  signupForm.addEventListener("submit", validateForm);
-
-  let writeUserData = (userId, blogtitle, blogcontent, date) => {
-    return new Promise((resolve, reject) => {
-      const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
-
-      set(userRef, {
-        userId: userId,
-        blogtitle: blogtitle,
-        blogcontent: blogcontent,
-        blogdate: date
-      })
-        .then(() => {
-          console.log("Blog saved to Firebase Database.");
-          resolve(); // Resolve the promise to indicate success
-        })
-        .catch((error) => {
-          console.error("Errori in Blog saving :", error);
-          reject(error); // Reject the promise with the error
-        });
-    });
-  }
-
-} else {
+  if (userAcc && userAcc.acc_type === "blogger") {
+  
+    const addClickListener = (elementId, destination) => {
+      const element = document.getElementById(elementId);
+      element.addEventListener("click", (event) => {
+        event.preventDefault();
+        localStorage.removeItem('AllBlog');
+        window.location.href = destination;
+      });
+    };
+    addClickListener('profile' , './dashboard/profile.html');
+   
+    // Check if the page has been loaded before
+    const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
+  
+    document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
+  
+    
+  } else {
     console.log("Any User Can View Blogs");
     document.getElementById("adminname").innerText = "Guest";
+    document.getElementById('profile').style.display = "none";
+    document.getElementById('dashboard').style.display = "none";
+    document.getElementById('logout').style.display = "none";
   } 

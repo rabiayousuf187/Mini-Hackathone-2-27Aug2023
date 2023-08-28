@@ -6,10 +6,10 @@ let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
 document.getElementById("Top").style.display = "block";
-if (userAcc && userAcc.acc_type === "blogger") {
+window.addEventListener("load", () => {
+  
 
-  console.log("Dashboard Page")
-  document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
+  console.log("BLogs View Page")
 
 //   let userId = userAcc.id;
 //   let imageURL = userAcc.blogimg;
@@ -31,19 +31,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
     document.getElementById(elementId).style.display = display;
   };
 
-  const addClickListener = (elementId, destination) => {
-    const element = document.getElementById(elementId);
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      localStorage.removeItem('AllBlog');
-      window.location.href = destination;
-    });
-  };
-  addClickListener('profile' , './dashboard/profile.html')
-  addClickListener('dashboard' , './dashboard/dashboard.html')
- 
-  // Check if the page has been loaded before
-  const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
   let capitalizeWords = (str) => {
     return str.replace(/\b\w/g, function (match) {
@@ -51,7 +38,21 @@ if (userAcc && userAcc.acc_type === "blogger") {
     });
   };
  
-
+   // Get Category Data for admin
+   let getAllItemData = async (url) => {
+    try {
+      const snapshot = await get(ref(database, url));
+      // Data snapshot contains the data at the specified location
+      let itemsData = snapshot.val();
+      console.log("Retrieved data:", itemsData);
+      // itemsData = Object.values(itemsData);
+      return itemsData;
+    } catch (error) {
+      console.error("Error getting data:", error);
+      alert(error);
+      return false;
+    }
+  };
 
   let showItem = (
     container,
@@ -103,7 +104,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
         console.log("single user BLog Show === ",link);
 
         localStorage.setItem("singleuser" , link);
-        window.location.href = "../pages/singleuser.html";
+        window.location.href = "./pages/singleuser.html";
       } else {
         console.log("not a target element");
       }
@@ -113,8 +114,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
     
   };
 
-  window.addEventListener("load", () => {
-    // ref(database, 'blogs/' + userId + `/${blogtitle}`)
     getAllItemData(`blogs/`)
       .then((blogData) => {
         if (!blogData) {
@@ -157,8 +156,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
                   let blog = blogData[outerKey];
                   console.log("outerKey === ", userId, user, blog);
             
-                  imageURL == null? imageURL = "../img/profile.png" : imageURL = userAcc.blogimg
-
+                  imageURL == null? imageURL = "../img/profile.png" : imageURL = user.blogimg
+                  username = `${user.firstname} ${user.lastname}`
             
                   // Render BLogsss
                   Object.values(blog).forEach((ele) => {
@@ -203,40 +202,6 @@ if (userAcc && userAcc.acc_type === "blogger") {
               }
               
           }
-          //   Object.values(userData).forEach((ele, ind) => {
-          //           blogData.find((user)=>{
-          //           // Object.values(blogData).find((user)=>{
-          //           if(userData[user].id === ele.userId){
-          //               username = `${userData.firstname} ${userData.lastname}`
-
-          //               console.log(container,
-          //                   ind, username,
-          //                   user.blogdate,
-          //                   user.blogtitle,
-          //                   user.blogcontent,
-          //                   ele.imageURL);
-          //               // container,
-          //               //     ind, username,
-          //               //     ele.blogdate,
-          //               //     ele.blogtitle,
-          //               //     ele.blogcontent,
-          //               //     imageURL
-          //               showItem(
-          //                       container,
-          //                       ind, username,
-          //                       user.blogdate,
-          //                       user.blogtitle,
-          //                       user.blogcontent,
-          //                       ele.imageURL
-          //                     );
-          //           }
-          //           else{
-                        
-          // console.log("Not found");
-          //           }
-
-          //       })
-                // })
             })
             
       .catch((error) => {
@@ -250,10 +215,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
             alert("Error fetching Blog Images:", error);
           });
 
-        // Process the retrieved data
-        // }
-    })
-//   });
+        
 
   let getSelectedItemData = async (url) => {
     try {
@@ -280,24 +242,32 @@ if (userAcc && userAcc.acc_type === "blogger") {
     }, 1000);
   });
 
-   // Get Category Data for admin
-  let getAllItemData = async (url) => {
-    try {
-      const snapshot = await get(ref(database, url));
-      // Data snapshot contains the data at the specified location
-      let itemsData = snapshot.val();
-      console.log("Retrieved data:", itemsData);
-      // itemsData = Object.values(itemsData);
-      return itemsData;
-    } catch (error) {
-      console.error("Error getting data:", error);
-      alert(error);
-      return false;
-    }
+
+
+});
+if (userAcc && userAcc.acc_type === "blogger") {
+  
+  const addClickListener = (elementId, destination) => {
+    const element = document.getElementById(elementId);
+    element.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem('AllBlog');
+      window.location.href = destination;
+    });
   };
+  addClickListener('profile' , './dashboard/profile.html')
+  addClickListener('dashboard' , './dashboard/dashboard.html')
+ 
+  // Check if the page has been loaded before
+  const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
+
+  document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
 
   
 } else {
   console.log("Any User Can View Blogs");
   document.getElementById("adminname").innerText = "Guest";
+  document.getElementById('profile').style.display = "none";
+  document.getElementById('dashboard').style.display = "none";
+  document.getElementById('logout').style.display = "none";
 } 
