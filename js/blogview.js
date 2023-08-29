@@ -255,9 +255,10 @@ if (userAcc && userAcc.acc_type === "blogger") {
       window.location.href = destination;
     });
   };
+  document.querySelector('.all-blog').classList.add('justify-content-space-between"')
   addClickListener('profile' , './dashboard/profile.html')
   addClickListener('dashboard' , './dashboard/dashboard.html')
- 
+
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
 
@@ -265,8 +266,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
   
 } else {
-  console.log("Any User Can View Blogs");
-  document.getElementById("adminname").innerText = "Guest";
+  console.log("Any User Can View Blogs")
+ document.getElementById("adminname").innerText = "Guest";
   document.getElementById('profile').style.display = "none";
   document.getElementById('dashboard').style.display = "none";
   document.getElementById('logout').style.display = "none";

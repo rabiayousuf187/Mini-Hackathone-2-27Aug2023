@@ -1,9 +1,19 @@
-import { isAuth, logout } from "../auth/auth.js";
-import firebaseExports from "../config/firebase-config.js";
+import { isAuth, logout } from "./auth/auth.js";
+import firebaseExports from "./config/firebase-config.js";
 let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
 document.getElementById("Top").style.display = "block";
+
+const addClickListener = (elementId, destination) => {
+  const element = document.getElementById(elementId);
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.removeItem('AllBlog');
+    window.location.href = destination;
+  });
+};
+
 window.addEventListener("load", () => {
 
   console.log("Single Blog Page")
@@ -48,15 +58,9 @@ window.addEventListener("load", () => {
     document.getElementById(elementId).style.display = display;
   };
 
-  const addClickListener = (elementId, destination) => {
-    const element = document.getElementById(elementId);
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.location.href = destination;
-    });
-  };
 
-  addClickListener('all-blog', '../blogview.html')
+
+  addClickListener('all-blog', './blogview.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
@@ -177,24 +181,23 @@ logoutbtn.addEventListener("click", function () {
 
 if (userAcc && userAcc.acc_type === "blogger") {
 
-  const addClickListener = (elementId, destination) => {
-    const element = document.getElementById(elementId);
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      localStorage.removeItem('AllBlog');
-      window.location.href = destination;
-    });
-  };
+
   addClickListener('profile', './dashboard/profile.html');
+  addClickListener('dashboard', './dashboard/dashboard.html');
 
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
 
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
-
+  console.log("document.getElementById('all-blog') === ", document.getElementById('all-blog'))
+  document.getElementById('all-blog').parentNode.classList.remove('justify-content-center')
+  document.getElementById('all-blog').parentNode.classList.add('justify-content-around')
 
 } else {
   console.log("Any User Can View Blogs");
+  document.getElementById('all-blog').parentNode.classList.remove('justify-content-around')
+  document.getElementById('all-blog').parentNode.classList.add('justify-content-center')
+
   document.getElementById("adminname").innerText = "Guest";
   document.getElementById('profile').style.display = "none";
   document.getElementById('dashboard').style.display = "none";
