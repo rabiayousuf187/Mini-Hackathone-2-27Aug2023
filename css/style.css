@@ -1644,7 +1644,7 @@ color: yellow;
 .left {
     width: 70%;
 }
-#email {
+.right #email {
     font-size: medium;
     text-align: end;
     margin-bottom: 0;
