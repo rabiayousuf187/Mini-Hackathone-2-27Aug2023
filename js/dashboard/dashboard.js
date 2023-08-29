@@ -47,6 +47,15 @@ if (userAcc && userAcc.acc_type === "blogger") {
       return match.toUpperCase();
     });
   };
+
+  let editBlog = (userId,link, updatetitle, updateblog) =>{
+
+    document.getElementById("publish").innerText = "Update Blog";
+    document.getElementById("blogtitle").value = updatetitle;
+    document.getElementById("blogcontent").value = updateblog;
+
+    // signupForm.addEventListener("submit", validateForm);
+  }
   let deleteBlog = (userId, id) =>{
     return new Promise((resolve, reject) => {
       const userRef = ref(database, 'blogs/' + userId + `/${id}`);
@@ -122,10 +131,18 @@ if (userAcc && userAcc.acc_type === "blogger") {
         event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
       ) {
         console.log("Icon selected");
-        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
+        let parent = event.target.parentNode.parentNode.parentNode;
+        console.log("Edit PArent ELe === ",parent);
+        link = parent.getAttribute('id');
         console.log("Edit link === ",link);
-        alert("Could not Edit Yet")
-        // editeBlog(userId,link)
+
+        let updatetitle = parent.querySelector('#blog-title').textContent;
+        let updateblog = parent.querySelector('#blog-content').textContent;
+  
+        console.log("Edit Blog Title === ",updatetitle);
+        console.log("Edit Blog === ",updateblog);
+        // alert("Could not Edit Yet")
+        editBlog(userId,link, updatetitle.trim(), updateblog.trim())
       }else {
         console.log("not a target element");
       }
@@ -268,7 +285,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   };
 
   // Function to validate the form on submission
-  function validateForm(event) {
+  let validateForm = (event) => {
     event.preventDefault();
 
     const blogtitle = document.getElementById("blogtitle").value;
@@ -337,6 +354,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
   // Attach form validation function to the form's submit event
   signupForm.addEventListener("submit", validateForm);
+  
 
   let writeUserData = (userId, blogtitle, blogcontent, date) => {
     return new Promise((resolve, reject) => {
