@@ -104,7 +104,7 @@ window.addEventListener("load", () => {
         console.log("single user BLog Show === ",link);
 
         localStorage.setItem("singleuser" , link);
-        window.location.href = "./pages/singleuser.html";
+        window.location.href = "./singleuser.html";
       } else {
         console.log("not a target element");
       }

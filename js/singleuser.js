@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     getDownloadURL,
   } = firebaseExports;
 
-  
+
   const showElement = (elementId, display = "block") => {
     document.getElementById(elementId).style.display = display;
   };
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
     });
   };
 
-  addClickListener('all-blog' , '../blogview.html')
+  addClickListener('all-blog', '../blogview.html')
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
   //
@@ -105,98 +105,98 @@ window.addEventListener("load", () => {
 
   };
 
-    // ref(database, 'blogs/' + userId + `/${blogtitle}`)
-    getAllItemData(`blogs/${userId}/`)
-      .then((blogData) => {
-        if (!blogData) {
-          console.log("Data is null");
-        } else {
-          // Here you can continue with rendering your data or performing other tasks
-          console.log("updated into Array ====:", blogData);
+  // ref(database, 'blogs/' + userId + `/${blogtitle}`)
+  getAllItemData(`blogs/${userId}/`)
+    .then((blogData) => {
+      if (!blogData) {
+        console.log("Data is null");
+      } else {
+        // Here you can continue with rendering your data or performing other tasks
+        console.log("updated into Array ====:", blogData);
 
-          userAcc.blogimg == null? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
-          const container = document.getElementById("blog-container");
-          blogData.forEach((ele, ind) => {
+        userAcc.blogimg == null ? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
+        const container = document.getElementById("blog-container");
+        blogData.forEach((ele, ind) => {
 
-            console.log("username, ele.date,ele.blogtitle,ele.blogcontent, === ", username, 
-          ele.blogdate,ele.blogtitle,ele.blogcontent,);
-            // ind, username, 
-            //   date,
-            //   blogtitle,
-            //   blogcontent,imageURL = ""
-            showItem(
-              container,
-              ind, username,
-              ele.blogdate,
-              ele.blogtitle,
-              ele.blogcontent,
-              imageURL
-            );
+          console.log("username, ele.date,ele.blogtitle,ele.blogcontent, === ", username,
+            ele.blogdate, ele.blogtitle, ele.blogcontent,);
+          // ind, username, 
+          //   date,
+          //   blogtitle,
+          //   blogcontent,imageURL = ""
+          showItem(
+            container,
+            ind, username,
+            ele.blogdate,
+            ele.blogtitle,
+            ele.blogcontent,
+            imageURL
+          );
 
-            // const lazyImages = document.querySelectorAll(".lazy-image");
-            //       const loadImagePromises = [];
-            //       lazyImages.forEach((img) => {
-            //         const promise = new Promise((resolve) => {
-            //           img.addEventListener("load", () => {
-            //             resolve();
-            //           });
-            //           img.src = img.getAttribute("data-src");
-            //         });
-            //         loadImagePromises.push(promise);
-            //       });
-            //       Promise.all(loadImagePromises)
-            //         .then(() => {
-            //           console.log("All lazy-loaded images are loaded.");
-            //         })
-            //         .catch((error) => {
-            //           console.error("An error occurred:", error);
-            //         });
+          // const lazyImages = document.querySelectorAll(".lazy-image");
+          //       const loadImagePromises = [];
+          //       lazyImages.forEach((img) => {
+          //         const promise = new Promise((resolve) => {
+          //           img.addEventListener("load", () => {
+          //             resolve();
+          //           });
+          //           img.src = img.getAttribute("data-src");
+          //         });
+          //         loadImagePromises.push(promise);
+          //       });
+          //       Promise.all(loadImagePromises)
+          //         .then(() => {
+          //           console.log("All lazy-loaded images are loaded.");
+          //         })
+          //         .catch((error) => {
+          //           console.error("An error occurred:", error);
+          //         });
 
-          })
-
-
-        }
-        // Process the retrieved data
-      })
-
-      .catch((error) => {
-        console.error("Error fetching Items Data:", error);
-      });
-  });
-
-  var logoutbtn = document.getElementById("logout");
-
-  logoutbtn.addEventListener("click", function () {
-
-    console.log("Logout");
-    setTimeout(() => {
-      logout();
-    }, 1000);
-  });
+        })
 
 
-  if (userAcc && userAcc.acc_type === "blogger") {
-  
-    const addClickListener = (elementId, destination) => {
-      const element = document.getElementById(elementId);
-      element.addEventListener("click", (event) => {
-        event.preventDefault();
-        localStorage.removeItem('AllBlog');
-        window.location.href = destination;
-      });
-    };
-    addClickListener('profile' , './dashboard/profile.html');
-   
-    // Check if the page has been loaded before
-    const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
-  
-    document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
-  
-    
-  } else {
-    console.log("Any User Can View Blogs");
-    document.getElementById("adminname").innerText = "Guest";
-    document.getElementById('profile').style.display = "none";
-    document.getElementById('dashboard').style.display = "none";
-    document.getElementById('logout').style.display = "none";
-  } 
+      }
+      // Process the retrieved data
+    })
+
+    .catch((error) => {
+      console.error("Error fetching Items Data:", error);
+    });
+});
+
+var logoutbtn = document.getElementById("logout");
+
+logoutbtn.addEventListener("click", function () {
+
+  console.log("Logout");
+  setTimeout(() => {
+    logout();
+  }, 1000);
+});
+
+
+if (userAcc && userAcc.acc_type === "blogger") {
+
+  const addClickListener = (elementId, destination) => {
+    const element = document.getElementById(elementId);
+    element.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem('AllBlog');
+      window.location.href = destination;
+    });
+  };
+  addClickListener('profile', './dashboard/profile.html');
+
+  // Check if the page has been loaded before
+  const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
+
+  document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
+
+
+} else {
+  console.log("Any User Can View Blogs");
+  document.getElementById("adminname").innerText = "Guest";
+  document.getElementById('profile').style.display = "none";
+  document.getElementById('dashboard').style.display = "none";
+  document.getElementById('logout').style.display = "none";
+} 
