@@ -141,25 +141,6 @@ document.getElementById('bloggerImg').src = imageURL;
             imageURL
           );
 
-          // const lazyImages = document.querySelectorAll(".lazy-image");
-          //       const loadImagePromises = [];
-          //       lazyImages.forEach((img) => {
-          //         const promise = new Promise((resolve) => {
-          //           img.addEventListener("load", () => {
-          //             resolve();
-          //           });
-          //           img.src = img.getAttribute("data-src");
-          //         });
-          //         loadImagePromises.push(promise);
-          //       });
-          //       Promise.all(loadImagePromises)
-          //         .then(() => {
-          //           console.log("All lazy-loaded images are loaded.");
-          //         })
-          //         .catch((error) => {
-          //           console.error("An error occurred:", error);
-          //         });
-
         })
 
 
@@ -172,15 +153,6 @@ document.getElementById('bloggerImg').src = imageURL;
     });
 });
 
-var logoutbtn = document.getElementById("logout");
-
-logoutbtn.addEventListener("click", function () {
-
-  console.log("Logout");
-  setTimeout(() => {
-    logout();
-  }, 1000);
-});
 
 
 if (userAcc && userAcc.acc_type === "blogger") {
@@ -202,8 +174,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById('all-blog').parentNode.classList.remove('justify-content-around')
   document.getElementById('all-blog').parentNode.classList.add('justify-content-center')
 
+  addClickListener('login', './auth/signin.html')
   document.getElementById("adminname").innerText = "Guest";
   document.getElementById('profile').style.display = "none";
   document.getElementById('dashboard').style.display = "none";
-  document.getElementById('logout').style.display = "none";
 } 

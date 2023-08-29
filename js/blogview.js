@@ -6,6 +6,16 @@ let userAcc = isAuth();
 console.log("userAcc get via is Auth()", userAcc);
 
 document.getElementById("Top").style.display = "block";
+
+
+const addClickListener = (elementId, destination) => {
+  const element = document.getElementById(elementId);
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.removeItem('AllBlog');
+    window.location.href = destination;
+  });
+}
 window.addEventListener("load", () => {
   
 
@@ -30,6 +40,7 @@ window.addEventListener("load", () => {
   const showElement = (elementId, display = "block") => {
     document.getElementById(elementId).style.display = display;
   };
+
 
   //
   let capitalizeWords = (str) => {
@@ -262,14 +273,6 @@ window.addEventListener("load", () => {
 });
 if (userAcc && userAcc.acc_type === "blogger") {
   
-  const addClickListener = (elementId, destination) => {
-    const element = document.getElementById(elementId);
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      localStorage.removeItem('AllBlog');
-      window.location.href = destination;
-    });
-  };
   document.querySelector('.all-blog').classList.add('justify-content-space-between"')
   addClickListener('profile' , './dashboard/profile.html')
   addClickListener('dashboard' , './dashboard/dashboard.html')
@@ -278,12 +281,14 @@ if (userAcc && userAcc.acc_type === "blogger") {
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
 
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
-
   
 } else {
-  console.log("Any User Can View Blogs")
+  console.log("Any User Can View Blogs");
+  addClickListener('login', './pages/auth/signin.html');
  document.getElementById("adminname").innerText = "Guest";
   document.getElementById('profile').style.display = "none";
   document.getElementById('dashboard').style.display = "none";
   document.getElementById('logout').style.display = "none";
+
+  addClickListener('login', './auth/signin.html')
 } 
