@@ -147,6 +147,7 @@ if (userAcc === null || userAcc === undefined) {
                   firstname: userData.firstname,
                   lastname: userData.lastname,
                   acc_type: userData.acc_type,
+                  blogimg: userData.blogimg,
                 };
                 // Data exists for the user ID
                 console.log("User Data", userData);

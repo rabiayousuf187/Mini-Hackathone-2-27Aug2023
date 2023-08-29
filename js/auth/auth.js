@@ -35,7 +35,7 @@ console.log("Local storage data for the origin has been removed.");
   // localStorage.removeItem("userAcc");
   // localStorage.removeItem
   console.log("Logout successfully! redirected to signin");
-  window.location.href = "../auth/signin.html";
+  window.location.href = "./blogview.html";
 }
 
 export { isAuth, logout };

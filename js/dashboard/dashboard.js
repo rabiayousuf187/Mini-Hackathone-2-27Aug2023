@@ -21,6 +21,8 @@ if (userAcc && userAcc.acc_type === "blogger") {
     set,
     get,
     remove,
+    push,
+    update,
     storage,
     storageRef,
     uploadBytes,
@@ -48,13 +50,42 @@ if (userAcc && userAcc.acc_type === "blogger") {
     });
   };
 
-  let editBlog = (userId,link, updatetitle, updateblog) =>{
+  let updateBlogData = (userId, blogId, updatedTitle, updatedContent, date) => {
+    return new Promise((resolve, reject) => {
+      const blogRef = ref(database, `blogs/${userId}/${blogId}`);
+  
+      update(blogRef, {
+        userId: userId,
+        blogId: blogRef.key,
+        blogtitle: updatedTitle,
+        blogcontent: updatedContent,
+        blogdate: date
+      })
+        .then(() => {
+          console.log("Blog post updated in Firebase Database.");
+          resolve(); // Resolve the promise to indicate success
+        })
+        .catch((error) => {
+          console.error("Error updating blog post:", error);
+          reject(error); // Reject the promise with the error
+        });
+    });
+  }
+
+
+  let editBlog = (userId,blogId, updatetitle, updateblog) =>{
 
     document.getElementById("publish").innerText = "Update Blog";
     document.getElementById("blogtitle").value = updatetitle;
     document.getElementById("blogcontent").value = updateblog;
 
-    // signupForm.addEventListener("submit", validateForm);
+    var currentDate = new Date();
+    var dateString = currentDate.toISOString().substr(0, 10); // Format as YYYY-MM-DD
+
+    console.log("Blog Date Append  == ", dateString)
+
+    localStorage.setItem("tobeupdateblog", blogId);
+    
   }
   let deleteBlog = (userId, id) =>{
     return new Promise((resolve, reject) => {
@@ -77,13 +108,14 @@ if (userAcc && userAcc.acc_type === "blogger") {
   let showItem = (
     container,
     ind, username,
+    blogId,
     date,
     blogtitle,
     blogcontent, imageURL
   ) => {
     username = capitalizeWords(username);
     // let link = replaceSpacesWithHyphens(category);
-    const itemHTML = `<div class="row" id='${blogtitle}'>
+    const itemHTML = `<div class="row" id='${blogId}'>
     <div class="title">
         <div class="blog-details">
             <div class="blogger-img">
@@ -157,6 +189,10 @@ if (userAcc && userAcc.acc_type === "blogger") {
       .then((blogData) => {
         if (!blogData) {
           console.log("Data is null");
+          const container = document.getElementById("blog-container");
+          let itemHTML =  `<h2 class=" justify-content-center text-center" style="color: red;"> No Blog Yet Post</h2>`;
+          container.insertAdjacentHTML("beforeend", itemHTML);
+
         } else {
           // Here you can continue with rendering your data or performing other tasks
           console.log("updated into Array ====:", blogData);
@@ -174,30 +210,31 @@ if (userAcc && userAcc.acc_type === "blogger") {
             showItem(
               container,
               ind, username,
+              ele.blogId,
               ele.blogdate,
               ele.blogtitle,
               ele.blogcontent,
               imageURL
             );
 
-            // const lazyImages = document.querySelectorAll(".lazy-image");
-            //       const loadImagePromises = [];
-            //       lazyImages.forEach((img) => {
-            //         const promise = new Promise((resolve) => {
-            //           img.addEventListener("load", () => {
-            //             resolve();
-            //           });
-            //           img.src = img.getAttribute("data-src");
-            //         });
-            //         loadImagePromises.push(promise);
-            //       });
-            //       Promise.all(loadImagePromises)
-            //         .then(() => {
-            //           console.log("All lazy-loaded images are loaded.");
-            //         })
-            //         .catch((error) => {
-            //           console.error("An error occurred:", error);
-            //         });
+            const lazyImages = document.querySelectorAll(".lazy-image");
+                  const loadImagePromises = [];
+                  lazyImages.forEach((img) => {
+                    const promise = new Promise((resolve) => {
+                      img.addEventListener("load", () => {
+                        resolve();
+                      });
+                      img.src = img.getAttribute("data-src");
+                    });
+                    loadImagePromises.push(promise);
+                  });
+                  Promise.all(loadImagePromises)
+                    .then(() => {
+                      console.log("All lazy-loaded images are loaded.");
+                    })
+                    .catch((error) => {
+                      console.error("An error occurred:", error);
+                    });
 
           })
 
@@ -279,18 +316,16 @@ if (userAcc && userAcc.acc_type === "blogger") {
       return itemsData;
     } catch (error) {
       console.error("Error getting data:", error);
-      alert(error);
+      // alert(error);
       return false;
     }
   };
 
   // Function to validate the form on submission
-  let validateForm = (event) => {
+  let validateForm = (event,blogtitle,blogcontent) => {
     event.preventDefault();
 
-    const blogtitle = document.getElementById("blogtitle").value;
-    const blogcontent = document.getElementById("blogcontent").value;
-
+    
     let acc_type, userAcc;
     // let acc_type = document.querySelector('input[name="acc_type"]:checked');
 
@@ -338,30 +373,50 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
         console.log("Blog Date Append  == ", dateString)
         console.log("User Id ==== ", userId);
-        writeUserData(userId, blogtitle, blogcontent, dateString)
+        let blogId = localStorage.getItem('tobeupdateblog');
+        if (blogId == null )
+        {
+          writeUserData(userId, blogtitle, blogcontent, dateString)
+            .then(() => {
+              alert("Blog is Successfully Published");
+              window.location.href = "../dashboard/dashboard.html";
+              //
+            })
+            .catch((error) => {
+              console.error("Error Publishing Blog:", error);
+            });
+        }else{
+          updateBlogData(userId,blogId, blogtitle, blogcontent, dateString)
           .then(() => {
-            alert("Blog is Successfully Published");
+            alert("Blog is Successfully updated");
             window.location.href = "../dashboard/dashboard.html";
             //
           })
           .catch((error) => {
-            console.error("Error Publishing Blog:", error);
+            console.error("Error update Blog:", error);
           });
+        }
 
       }
     }
   }
 
   // Attach form validation function to the form's submit event
-  signupForm.addEventListener("submit", validateForm);
+  signupForm.addEventListener("submit", ()=>{
+    const blogtitle = document.getElementById("blogtitle").value;
+    const blogcontent = document.getElementById("blogcontent").value;
+    validateForm(event, blogtitle,blogcontent)
+  });
   
 
   let writeUserData = (userId, blogtitle, blogcontent, date) => {
     return new Promise((resolve, reject) => {
-      const userRef = ref(database, 'blogs/' + userId + `/${blogtitle}`);
-
-      set(userRef, {
+      const userRef = ref(database, 'blogs/' + userId);
+      const newBlogRef = push(userRef); // Generate a unique key
+  
+      set(newBlogRef, {
         userId: userId,
+        blogId: newBlogRef.key,
         blogtitle: blogtitle,
         blogcontent: blogcontent,
         blogdate: date
@@ -371,11 +426,12 @@ if (userAcc && userAcc.acc_type === "blogger") {
           resolve(); // Resolve the promise to indicate success
         })
         .catch((error) => {
-          console.error("Errori in Blog saving :", error);
+          console.error("Error in Blog saving:", error);
           reject(error); // Reject the promise with the error
         });
     });
   }
+  
 
 } else if (userAcc !== null) {
   console.log("User is already logged In, did not required Login again");
