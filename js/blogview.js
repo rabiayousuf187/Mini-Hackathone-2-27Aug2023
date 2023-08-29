@@ -277,6 +277,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   addClickListener('profile' , './dashboard/profile.html')
   addClickListener('dashboard' , './dashboard/dashboard.html')
 
+  document.getElementById('login').style.display = "none";
   // Check if the page has been loaded before
   const isFirstLoad = JSON.parse(localStorage.getItem("isUserFirstLoad"));
 

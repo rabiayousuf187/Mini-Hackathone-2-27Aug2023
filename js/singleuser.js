@@ -169,6 +169,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById('all-blog').parentNode.classList.remove('justify-content-center')
   document.getElementById('all-blog').parentNode.classList.add('justify-content-around')
 
+  document.getElementById('login').style.display = "none";
 } else {
   console.log("Any User Can View Blogs");
   document.getElementById('all-blog').parentNode.classList.remove('justify-content-around')
