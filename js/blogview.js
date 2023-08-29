@@ -7,6 +7,19 @@ console.log("userAcc get via is Auth()", userAcc);
 
 document.getElementById("Top").style.display = "block";
 
+const currentHour = new Date().getHours();
+let greeting;
+
+if (currentHour >= 5 && currentHour < 12) {
+  greeting = "Good Morning";
+} else if (currentHour >= 12 && currentHour < 18) {
+  greeting = "Good Afternoon!";
+} else if (currentHour >= 18 && currentHour < 22) {
+  greeting = "Good Evening";
+} else {
+  greeting = "Good Night";
+}
+document.getElementById('greet').textContent = greeting + " Reader!"
 
 const addClickListener = (elementId, destination) => {
   const element = document.getElementById(elementId);
@@ -283,6 +296,15 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
   document.getElementById("adminname").innerText = userAcc.firstname + " " + userAcc.lastname;
   
+  var logoutbtn = document.getElementById("logout");
+
+  logoutbtn.addEventListener("click", function () {
+
+      console.log("Logout");
+      setTimeout(() => {
+          logout();
+      }, 1000);
+  });
 } else {
   console.log("Any User Can View Blogs");
   addClickListener('login', './pages/auth/signin.html');

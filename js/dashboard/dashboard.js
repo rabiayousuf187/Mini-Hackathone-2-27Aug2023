@@ -209,14 +209,15 @@ if (userAcc && userAcc.acc_type === "blogger") {
   };
 
 
+
   var logoutbtn = document.getElementById("logout");
 
   logoutbtn.addEventListener("click", function () {
 
-    console.log("Logout");laz
-    setTimeout(() => {
-      logout();
-    }, 1000);
+      console.log("Logout");
+      setTimeout(() => {
+          logout();
+      }, 1000);
   });
 
   const signupForm = document.getElementById("signup-form");

@@ -1682,3 +1682,6 @@ h2#bloggername {
 div#blog-container {
     padding: 0px 30px;
 }
+.top-header.header2.greet {
+    padding: 20px 0px;
+}

@@ -170,6 +170,16 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById('all-blog').parentNode.classList.add('justify-content-around')
 
   document.getElementById('login').style.display = "none";
+  
+  var logoutbtn = document.getElementById("logout");
+
+  logoutbtn.addEventListener("click", function () {
+
+      console.log("Logout");
+      setTimeout(() => {
+          logout();
+      }, 1000);
+  });
 } else {
   console.log("Any User Can View Blogs");
   document.getElementById('all-blog').parentNode.classList.remove('justify-content-around')
