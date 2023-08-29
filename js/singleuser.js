@@ -42,6 +42,7 @@ window.addEventListener("load", () => {
   
   let username = singleuser.name;
   let imageURL = singleuser.img;
+  let email = singleuser.email;
   imageURL == null ? imageURL = "../../img/profile.png" : imageURL = imageURL;
   console.log("userAcc ", userAcc);
 
@@ -64,6 +65,9 @@ window.addEventListener("load", () => {
   };
 
 document.getElementById('bloggername').innerText = username + " Blogs";
+document.getElementById('email').innerText = email;
+document.getElementById('profilename').innerText = username;
+document.getElementById('bloggerImg').src = imageURL;
 
   addClickListener('all-blog', './blogview.html')
   // Check if the page has been loaded before
@@ -86,7 +90,7 @@ document.getElementById('bloggername').innerText = username + " Blogs";
     // let link = replaceSpacesWithHyphens(category);
     const itemHTML = `<div class="row" id='${blogtitle}'>
     <div class="title">
-        <div class="blog-details">
+        <div class="blog-details" >
             <div class="blogger-img">
                 <img src="${imageURL}" alt="user" data-src="${imageURL}" class="lazy-image"/>
             </div>
@@ -101,11 +105,6 @@ document.getElementById('bloggername').innerText = username + " Blogs";
         <div class="blog-content">
             <p id="blog-content">
                 ${blogcontent}</p>
-        </div>
-        <div class="blog-content">
-            <a id="delete" href
-            ="#" >Delete</a>
-            <a id="edit" href ="#">Edit</a>
         </div>
     </div>
 </div>`;

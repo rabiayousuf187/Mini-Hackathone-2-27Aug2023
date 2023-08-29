@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
 
   let showItem = (
     container,
-    userId, username,
+    userId, username, email,
     date,
     blogtitle,
     blogcontent, imageURL
@@ -65,7 +65,8 @@ window.addEventListener("load", () => {
     // let link = replaceSpacesWithHyphens(category);
     const itemHTML = `<div class="row" id='${blogtitle}'>
     <div class="title">
-        <div class="blog-details">
+    <div class="blog-details">
+              <p id="email" style = "display:none;">${email}</p>
               <div class="blogger-img">
                   <img src="../img/profile.png" alt="user" data-src="${imageURL}" class="lazy-image"/>
               </div>
@@ -103,7 +104,9 @@ window.addEventListener("load", () => {
         
         let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
         let name = event.target.parentNode.parentNode.querySelector('#username').textContent;
+        let email = event.target.parentNode.parentNode.querySelector('#email').textContent;
 
+        console.log("TArgey IMg ===== ", email);
         console.log("TArgey IMg ===== ", img);
         link = event.target.getAttribute('id');
         console.log("single user BLog Show === ",link);
@@ -111,7 +114,8 @@ window.addEventListener("load", () => {
         let singleuser ={
           id: link,
           img: img,
-          name: name
+          name: name,
+          email: email
         }
         localStorage.setItem("singleuser" , JSON.stringify(singleuser));
         window.location.href = "./singleuser.html";
@@ -162,6 +166,7 @@ window.addEventListener("load", () => {
                   // Access the 'key' property within the 'innerObj'
                   let user = userData[outerKey];
                   let imageURL = userData[outerKey].blogimg;
+                  let email = userData[outerKey].email;
                   let userId = outerKey;
                   let blog = blogData[outerKey];
                   console.log("outerKey === ", userId, user, blog);
@@ -175,7 +180,7 @@ window.addEventListener("load", () => {
                     
                     showItem(
                       container,
-                      userId, username,
+                      userId, username,email,
                       ele.blogdate,
                       ele.blogtitle,
                       ele.blogcontent,

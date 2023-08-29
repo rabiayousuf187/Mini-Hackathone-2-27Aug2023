@@ -1616,3 +1616,69 @@ section.main-page .main-heading {
 .top-header.all-blog a{
 color: yellow;
 }
+.container.single-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+}
+
+.right {
+    /* height: 200px; */
+    background: aquamarine;
+    width: 30%;
+    background: repeating-linear-gradient(45deg, #0000001a, transparent 40px);
+}
+.div-right {
+    position: relative;
+    top: 200px;
+    background: repeating-linear-gradient(-19deg, #980af1, #7d6d6dcf 0.5px);
+    /* right: 0px; */
+    background: linear-gradient(124deg, #4b0577, #8a00e07d);
+    border-radius: 9px;
+    padding: 50px 20px;
+    /* width: 20%; */
+    text-align: end;
+    box-shadow: 3px 4px 11px 8px #8a7a7a75;
+}
+.left {
+    width: 70%;
+}
+h4#email {
+    font-size: medium;
+    text-align: end;
+    margin-bottom: 0;
+    color: white;
+}
+
+h3#profilename {
+    font-size: xx-large;
+    color: whitesmoke;
+    font-weight: 700;
+    text-align: end;
+}
+.div-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    padding: 10px 10px 10px;
+}
+img#bloggerImg {
+    text-align: center;
+    width: 100%;
+    padding-bottom: 25px;
+    overflow: hidden;
+}
+h2#bloggername {
+    text-transform: uppercase;
+    text-decoration-line: underline;
+}
+.my-blog .row {
+    margin: 15px 0px;
+    border-bottom: 2px solid #8080803d;
+    padding-bottom: 25px;
+}
+div#blog-container {
+    padding: 0px 30px;
+}
