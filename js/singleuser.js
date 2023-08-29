@@ -189,4 +189,5 @@ if (userAcc && userAcc.acc_type === "blogger") {
   document.getElementById("adminname").innerText = "Guest";
   document.getElementById('profile').style.display = "none";
   document.getElementById('dashboard').style.display = "none";
+  document.getElementById('logout').style.display = "none";
 } 
