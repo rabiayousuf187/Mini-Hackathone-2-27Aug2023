@@ -66,25 +66,25 @@ window.addEventListener("load", () => {
     const itemHTML = `<div class="row" id='${blogtitle}'>
     <div class="title">
         <div class="blog-details">
-            <div class="blogger-img">
-                <img src="../img/profile.png" alt="user" data-src="${imageURL}" class="lazy-image"/>
-            </div>
-            <div class="blog-title">
+              <div class="blogger-img">
+                  <img src="../img/profile.png" alt="user" data-src="${imageURL}" class="lazy-image"/>
+              </div>
+              <div class="blog-title">
                 <h3 id="blog-title">${blogtitle}</h3>
                 <div class="user-details">
-                    <p id="username">${username} - </p> 
-                    <p id="date">${date}</p> 
+                    <p id="username">${username}</p> 
+                    <p id="date">- ${date}</p> 
                 </div>
-            </div>
+              </div>
         </div>
         <div class="blog-content">
           <p id="blog-content">
           ${blogcontent}</p>
         </div>
         <div class="blog-content">
-        <a id="${userId}" href="#" style="color: #830bcee6;
-        font-size: medium;font-weight: 500;" >See all from this user</a>
-    </div>
+          <a id="${userId}" href="#" style="color: #830bcee6;
+          font-size: medium;font-weight: 500;" >See all from this user</a>
+        </div>
     </div>
 </div>`;
 
@@ -100,10 +100,20 @@ window.addEventListener("load", () => {
       );
       if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
         console.log("Icon selected");
+        
+        let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
+        let name = event.target.parentNode.parentNode.querySelector('#username').textContent;
+
+        console.log("TArgey IMg ===== ", img);
         link = event.target.getAttribute('id');
         console.log("single user BLog Show === ",link);
 
-        localStorage.setItem("singleuser" , link);
+        let singleuser ={
+          id: link,
+          img: img,
+          name: name
+        }
+        localStorage.setItem("singleuser" , JSON.stringify(singleuser));
         window.location.href = "./singleuser.html";
       } else {
         console.log("not a target element");

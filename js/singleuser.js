@@ -34,11 +34,16 @@ window.addEventListener("load", () => {
     }
   };
 
-  let userId = localStorage.getItem("singleuser");
-  let imageURL = userAcc.blogimg;
-  console.log("userAcc ", userAcc);
-  let username = `${userAcc.firstname} ${userAcc.lastname} `;
+  let singleuser = localStorage.getItem("singleuser");
+  singleuser = JSON.parse(singleuser);
+
+  let userId = singleuser.id;
   console.log("userAcc Id", userId);
+  
+  let username = singleuser.name;
+  let imageURL = singleuser.img;
+  imageURL == null ? imageURL = "../../img/profile.png" : imageURL = imageURL;
+  console.log("userAcc ", userAcc);
 
   // Use the Firebase Configuration functions
   const {
@@ -58,7 +63,7 @@ window.addEventListener("load", () => {
     document.getElementById(elementId).style.display = display;
   };
 
-
+document.getElementById('bloggername').innerText = username + " Blogs";
 
   addClickListener('all-blog', './blogview.html')
   // Check if the page has been loaded before
@@ -118,7 +123,7 @@ window.addEventListener("load", () => {
         // Here you can continue with rendering your data or performing other tasks
         console.log("updated into Array ====:", blogData);
 
-        userAcc.blogimg == null ? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
+        
         const container = document.getElementById("blog-container");
         blogData.forEach((ele, ind) => {
 
