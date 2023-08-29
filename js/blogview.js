@@ -78,16 +78,25 @@ window.addEventListener("load", () => {
     }
   };
 
+  // container,
+  // userId, username,email,
+  // ele.blogId,
+  // ele.blogdate,
+  // ele.blogtitle,
+  // ele.blogcontent,
+  // imageURL
+
   let showItem = (
     container,
     userId, username, email,
+    blogId,
     date,
     blogtitle,
     blogcontent, imageURL
   ) => {
     username = capitalizeWords(username);
     // let link = replaceSpacesWithHyphens(category);
-    const itemHTML = `<div class="row" id='${blogtitle}'>
+    const itemHTML = `<div class="row" id='${blogId}'>
     <div class="title">
     <div class="blog-details">
               <p id="email" style = "display:none;">${email}</p>
@@ -196,6 +205,7 @@ window.addEventListener("load", () => {
                   console.log("outerKey === ", userId, user, blog);
             
                   imageURL == null? imageURL = "../img/profile.png" : imageURL = user.blogimg
+                  console.log("User ID img == ", userId, imageURL)
                   username = `${user.firstname} ${user.lastname}`
             
                   // Render BLogsss
@@ -205,6 +215,7 @@ window.addEventListener("load", () => {
                     showItem(
                       container,
                       userId, username,email,
+                      ele.blogId,
                       ele.blogdate,
                       ele.blogtitle,
                       ele.blogcontent,
@@ -212,32 +223,27 @@ window.addEventListener("load", () => {
                     );
 
                     
+            const lazyImages = document.querySelectorAll(".lazy-image");
+            const loadImagePromises = [];
+            lazyImages.forEach((img) => {
+              const promise = new Promise((resolve) => {
+                img.addEventListener("load", () => {
+                  resolve();
+                });
+                img.src = img.getAttribute("data-src");
+              });
+              loadImagePromises.push(promise);
+            });
+            Promise.all(loadImagePromises)
+              .then(() => {
+                console.log("All lazy-loaded images are loaded.");
+              })
+              .catch((error) => {
+                console.error("An error occurred:", error);
+              });
                   });
                 }
 
-                const lazyImages = document.querySelectorAll(".lazy-image");
-                console.log("LAzy images ==== ", lazyImages)
-                    const loadImagePromises = [];
-                    lazyImages.forEach((img) => {
-                      const promise = new Promise((resolve) => {
-                        img.addEventListener("load", () => {
-                          resolve();
-                        });
-                        console.log("img.src  ===", img.src)
-                        setTimeout( ()=>{
-                          img.src = img.getAttribute("data-src");
-
-                        } , 300);
-                      });
-                      loadImagePromises.push(promise);
-                    });
-                    Promise.all(loadImagePromises)
-                      .then(() => {
-                        console.log("All lazy-loaded images are loaded.");
-                      })
-                      .catch((error) => {
-                        console.error("An error occurred:", error);
-                      });
               }
               
           }

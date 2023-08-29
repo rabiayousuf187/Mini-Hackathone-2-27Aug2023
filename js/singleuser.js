@@ -66,6 +66,7 @@ window.addEventListener("load", () => {
 
 document.getElementById('bloggername').innerText = username + " Blogs";
 document.getElementById('email').innerText = email;
+document.getElementById('email').href = `mailto:${email}`;
 document.getElementById('profilename').innerText = username;
 document.getElementById('bloggerImg').src = imageURL;
 
@@ -82,13 +83,14 @@ document.getElementById('bloggerImg').src = imageURL;
   let showItem = (
     container,
     ind, username,
+    blogId,
     date,
     blogtitle,
     blogcontent, imageURL
   ) => {
     username = capitalizeWords(username);
     // let link = replaceSpacesWithHyphens(category);
-    const itemHTML = `<div class="row" id='${blogtitle}'>
+    const itemHTML = `<div class="row" id='${blogId}'>
     <div class="title">
         <div class="blog-details" >
             <div class="blogger-img">
@@ -135,12 +137,32 @@ document.getElementById('bloggerImg').src = imageURL;
           showItem(
             container,
             ind, username,
+            ele.blogId,
             ele.blogdate,
             ele.blogtitle,
             ele.blogcontent,
             imageURL
           );
 
+          
+          const lazyImages = document.querySelectorAll(".lazy-image");
+          const loadImagePromises = [];
+          lazyImages.forEach((img) => {
+            const promise = new Promise((resolve) => {
+              img.addEventListener("load", () => {
+                resolve();
+              });
+              img.src = img.getAttribute("data-src");
+            });
+            loadImagePromises.push(promise);
+          });
+          Promise.all(loadImagePromises)
+            .then(() => {
+              console.log("All lazy-loaded images are loaded.");
+            })
+            .catch((error) => {
+              console.error("An error occurred:", error);
+            });
         })
 
 
