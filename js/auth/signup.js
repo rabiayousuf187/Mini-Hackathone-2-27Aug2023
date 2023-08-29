@@ -188,7 +188,7 @@ if (userAcc === null || userAcc === undefined) {
           writeUserData(user.uid, firstname,lastname, email, password,  acc_type)
             .then(() => {
               userAcc = {
-                userId: user.uid,
+                id: user.uid,
                 firstname: firstname,
                 lastname: lastname,
                 acc_type: acc_type,
