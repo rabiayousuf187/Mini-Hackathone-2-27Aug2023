@@ -11,7 +11,7 @@ function openpage() {
 
     }, 2000);
 }
-
+ 
 const burst = new mojs.Burst({
     radius:   { 0: 300 },
     count:    30,
