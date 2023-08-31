@@ -1410,36 +1410,6 @@ a:hover {
     font-size: 17px;
 }
 
-/* ************* Media Query ********************** */
-/* @media (min-width: 320px) and (max-width: 480px) {  */
-
-@media (max-width: 428px) {
-    .product-body .uk-panel img {
-        height: 70px;
-        width: 70px;
-        padding: 10px;
-    }
-
-    .product-body .uk-panel h3 {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 884px) {
-    .purchase .container {
-        width: 90%;
-    }
-
-    .purchase .show-item-inner .sub-cat-title {
-        justify-content: space-between;
-    }
-
-    .purchase .item-weight-price {
-        flex-basis: 16%;
-    }
-
-
-}
 
 
 /* *********************** New Project CSS ********************** */
@@ -1687,3 +1657,65 @@ div#blog-container {
 .top-header.header2.greet {
     padding: 20px 0px;
 } 
+
+/* ************* Media Query ********************** */
+/* @media (min-width: 320px) and (max-width: 480px) {  */
+
+    @media (max-width: 428px) {
+        .product-body .uk-panel img {
+            height: 70px;
+            width: 70px;
+            padding: 10px;
+        }
+    
+        .product-body .uk-panel h3 {
+            font-size: 14px;
+        }
+    }
+    
+    @media (max-width: 884px) {
+        .purchase .container {
+            width: 90%;
+        }
+    
+        .purchase .show-item-inner .sub-cat-title {
+            justify-content: space-between;
+        }
+    
+        .purchase .item-weight-price {
+            flex-basis: 16%;
+        }
+    
+    
+    }
+
+    @media (max-width: 848px) {
+        .container {
+            width: 80%;
+        }
+        .main-heading {
+            font-size: 4vw;
+        }
+    }
+    @media (max-width: 428px) {
+        .container{
+            width: 100%;
+        }
+        section.Blog .main-page-text  {
+            padding: 10px !important;
+        }
+        .main-heading {
+            font-size: 7vw;
+            width: 80%;
+            line-height: 26px;
+            padding-bottom: 15px !important;
+        }
+        .btn-get-started {
+            width: 156px;
+            height: 55px;
+            font-size: 22px;
+            }
+        
+            
+    }
+    
