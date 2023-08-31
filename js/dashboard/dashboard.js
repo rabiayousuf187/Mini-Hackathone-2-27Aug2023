@@ -31,7 +31,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
   const showElement = (elementId, display = "block") => {
     document.getElementById(elementId).style.display = display;
   };
-
+  const container = document.getElementById("blog-container");
   const addClickListener = (elementId, destination) => {
     const element = document.getElementById(elementId);
     element.addEventListener("click", (event) => {
@@ -130,8 +130,9 @@ if (userAcc && userAcc.acc_type === "blogger") {
             </div>
         </div>
         <div class="blog-content">
-            <p id="blog-content">
-                ${blogcontent}</p>
+        <p id="blog-content" class="blog-content-text">
+        ${blogcontent}</p>
+        <a id="read-more-btn" class="read-more-btn">More</a>
         </div>
         <div class="blog-content">
             <a id="delete" href
@@ -143,45 +144,65 @@ if (userAcc && userAcc.acc_type === "blogger") {
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
-    container.addEventListener("click", function (event) {
-      let link;
-      console.log(
-        "Button pressed",
-        event,
-        event.target.querySelector("i"),
-        event.target.tagName
-      );
-      if (
-        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'delete'
-      ) {
-        console.log("Icon selected");
-        link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
-        console.log("Delete link === ",link);
-
-        deleteBlog(userId,link)
-      } else if (
-        event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
-      ) {
-        console.log("Icon selected");
-        let parent = event.target.parentNode.parentNode.parentNode;
-        console.log("Edit PArent ELe === ",parent);
-        link = parent.getAttribute('id');
-        console.log("Edit link === ",link);
-
-        let updatetitle = parent.querySelector('#blog-title').textContent;
-        let updateblog = parent.querySelector('#blog-content').textContent;
-  
-        console.log("Edit Blog Title === ",updatetitle);
-        console.log("Edit Blog === ",updateblog);
-        // alert("Could not Edit Yet")
-        editBlog(userId,link, updatetitle.trim(), updateblog.trim())
-      }else {
-        console.log("not a target element");
-      }
-
-      // addCart(selectedCategory, link);
-    });
   };
+
+
+  
+  container.addEventListener("click", function (event) {
+    let link;
+    console.log(
+      "Button pressed",
+      event,
+      event.target.querySelector("i"),
+      event.target.tagName
+    );
+    if (event.target.tagName === "A" && event.target.getAttribute('id') === "read-more-btn" && event.target.classList.contains("read-more-btn")) {
+
+      const contentParagraph = event.target.parentNode.querySelector('.blog-content-text');
+      const moreButton = event.target;
+  
+      if (contentParagraph.classList.contains('expanded')) {
+        contentParagraph.classList.remove('expanded');
+        moreButton.textContent = 'More';
+      } else {
+        contentParagraph.classList.add('expanded');
+        moreButton.textContent = 'Less';
+      }
+  
+      event.stopPropagation();
+    
+  }
+  else if(event.target.tagName === "A" &&  event.target.getAttribute('id') == 'delete') {
+      console.log("Icon selected");
+      link = event.target.parentNode.parentNode.parentNode.getAttribute('id');
+      console.log("Delete link === ",link);
+
+      deleteBlog(userId,link)
+    } else if (
+      event.target.tagName === "A" &&  event.target.getAttribute('id') == 'edit'
+    ) {
+      console.log("Icon selected");
+      let parent = event.target.parentNode.parentNode.parentNode;
+      console.log("Edit PArent ELe === ",parent);
+      link = parent.getAttribute('id');
+      console.log("Edit link === ",link);
+
+      let updatetitle = parent.querySelector('#blog-title').textContent;
+      let updateblog = parent.querySelector('#blog-content').textContent;
+
+      console.log("Edit Blog Title === ",updatetitle);
+      console.log("Edit Blog === ",updateblog);
+      // alert("Could not Edit Yet")
+      editBlog(userId,link, updatetitle.trim(), updateblog.trim())
+      event.stopPropagation();
+    }else {
+      console.log("not a target element");
+      event.stopPropagation();
+    }
+
+    // addCart(selectedCategory, link);
+  });
+
 
   window.addEventListener("load", () => {
     // ref(database, 'blogs/' + userId + `/${blogtitle}`)
@@ -198,7 +219,7 @@ if (userAcc && userAcc.acc_type === "blogger") {
           console.log("updated into Array ====:", blogData);
 
           userAcc.blogimg == null? imageURL = "../../img/profile.png" : imageURL = userAcc.blogimg
-          const container = document.getElementById("blog-container");
+          
           blogData.forEach((ele, ind) => {
 
             console.log("username, ele.date,ele.blogtitle,ele.blogcontent, === ", username, 

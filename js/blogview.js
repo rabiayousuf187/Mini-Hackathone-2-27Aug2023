@@ -126,11 +126,6 @@ window.addEventListener("load", () => {
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
-    // const buttons = document.querySelectorAll('.read-more-btn');
-    // buttons.forEach(button => {
-    //   console.log("Button====", button)
-    //   button.addEventListener('click', toggleContent(button));
-    // });
   };
 
     

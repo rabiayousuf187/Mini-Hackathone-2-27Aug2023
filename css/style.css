@@ -1827,6 +1827,14 @@ img.lazy-image {
         margin: auto;
         padding: 20px 10px;
     }
+    textarea#blogcontent {
+        padding: 13px;
+        text-align: justify;
+        font-size: 14px;
+    }
+    .signup .form input, .signup .form .inp-icon {
+        font-size: 14px;
+    }
 }
 @media (max-width: 375px){
     /* .container {
