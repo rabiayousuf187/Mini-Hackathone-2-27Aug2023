@@ -1679,6 +1679,18 @@ overflow: hidden;
 .expanded {
     max-height: none !important;
 }
+.blogger-img {
+    width: 70px;
+    height: 70px;
+}
+img.lazy-image {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #830bce;
+    border-radius: 7px;
+    margin: 0px;
+    padding: 1px;
+}
 /* ************* Media Query ********************** */
 /* @media (min-width: 320px) and (max-width: 480px) {  */
 
@@ -1758,13 +1770,7 @@ overflow: hidden;
   overflow: hidden;
     }
     
-    img.lazy-image {
-        width: 60px;
-        border: 2px solid #830bce;
-        border-radius: 50%;
-        margin: 0px;
-        /* padding: 1px; */
-    }
+    
     
     h3#blog-title {
         font-size: 15px;
