@@ -1672,18 +1672,13 @@ div#blog-container {
 .top-header.header2.greet {
     padding: 20px 0px;
 }
-p#blog-content {
+.blog-content p{
     max-height: 3em; /* Display only 3 lines initially */
 overflow: hidden;
 }
-.post-content {
-    max-height: 3em; /* Display only 3 lines initially */
-    overflow: hidden;
-  }
-  
-  .expanded {
+.expanded {
     max-height: none !important;
-  }
+}
 /* ************* Media Query ********************** */
 /* @media (min-width: 320px) and (max-width: 480px) {  */
 
@@ -1757,7 +1752,7 @@ overflow: hidden;
     div#blog-container {
         padding: 0px 10px;
     }
-    p#blog-content {
+    .blog-content p {
         font-size: 12px;
         max-height: 3em; /* Display only 3 lines initially */
   overflow: hidden;

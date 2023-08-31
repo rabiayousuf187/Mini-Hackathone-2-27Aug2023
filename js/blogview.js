@@ -78,15 +78,6 @@ window.addEventListener("load", () => {
     }
   };
 
-// Function to toggle between collapsed and expanded state
-let toggleContent = (btn) => {
-  console.log("This -==== ",btn);
-  const content = btn.previousElementSibling;
-  console.log("This -==== ",content);
-  content.classList.toggle('expanded');
-  btn.textContent = content.classList.contains('expanded') ? 'Less' : 'More';
-}
-
   
   // container,
   // userId, username,email,
@@ -122,9 +113,9 @@ let toggleContent = (btn) => {
               </div>
         </div>
         <div class="blog-content">
-          <p id="blog-content">
+          <p id="blog-content" class="blog-content-text">
           ${blogcontent}</p>
-          <button id="read-more-btn" class="read-more-btn">More</button>
+          <a id="read-more-btn" class="read-more-btn">More</a>
         </div>
         <div class="blog-content">
           <a id="${userId}" href="#" style="color: #830bcee6;
@@ -140,45 +131,62 @@ let toggleContent = (btn) => {
     //   console.log("Button====", button)
     //   button.addEventListener('click', toggleContent(button));
     // });
-    container.addEventListener("click", function (event) {
-      let link;
-      console.log(
-        "Button pressed",
-        event,
-        event.target.querySelector("i"),
-        event.target.tagName
-      );
-      if (event.target.tagName === "BUTTON" && event.target.getAttribute('id') === "read-more-btn") {
-        toggleContent(event.target);
-      }
-      else if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
-        console.log("Icon selected");
-        
-        let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
-        let name = event.target.parentNode.parentNode.querySelector('#username').textContent;
-        let email = event.target.parentNode.parentNode.querySelector('#email').textContent;
-
-        console.log("TArgey IMg ===== ", email);
-        console.log("TArgey IMg ===== ", img);
-        link = event.target.getAttribute('id');
-        console.log("single user BLog Show === ",link);
-
-        let singleuser ={
-          id: link,
-          img: img,
-          name: name,
-          email: email
-        }
-        localStorage.setItem("singleuser" , JSON.stringify(singleuser));
-        window.location.href = "./singleuser.html";
-      } else {
-        console.log("not a target element");
-      }
-
-      // addCart(selectedCategory, link);
-    })
-    
   };
+
+    
+  document.getElementById('blog-container').addEventListener("click", function (event) {
+    let link;
+    console.log(
+      "Button pressed",
+      event,
+      event.target.querySelector("i"),
+      event.target.tagName
+    );
+    if (event.target.tagName === "A" && event.target.getAttribute('id') === "read-more-btn" && event.target.classList.contains("read-more-btn")) {
+
+        const contentParagraph = event.target.parentNode.querySelector('.blog-content-text');
+        const moreButton = event.target;
+    
+        if (contentParagraph.classList.contains('expanded')) {
+          contentParagraph.classList.remove('expanded');
+          moreButton.textContent = 'More';
+        } else {
+          contentParagraph.classList.add('expanded');
+          moreButton.textContent = 'Less';
+        }
+    
+        event.stopPropagation();
+      
+    }
+    else if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
+      console.log("Icon selected");
+      
+      let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
+      let name = event.target.parentNode.parentNode.querySelector('#username').textContent;
+      let email = event.target.parentNode.parentNode.querySelector('#email').textContent;
+
+      console.log("TArgey IMg ===== ", email);
+      console.log("TArgey IMg ===== ", img);
+      link = event.target.getAttribute('id');
+      console.log("single user BLog Show === ",link);
+
+      let singleuser ={
+        id: link,
+        img: img,
+        name: name,
+        email: email
+      }
+      localStorage.setItem("singleuser" , JSON.stringify(singleuser));
+      window.location.href = "./singleuser.html";
+      event.stopPropagation();
+    } else {
+      console.log("not a target element");
+      event.stopPropagation();
+    }
+    // event.stopPropagation();
+
+    // addCart(selectedCategory, link);
+  })
 
     getAllItemData(`blogs/`)
       .then((blogData) => {
