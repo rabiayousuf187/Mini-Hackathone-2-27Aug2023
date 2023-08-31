@@ -1691,25 +1691,24 @@ div#blog-container {
 
     @media (max-width: 848px) {
         .container {
-            width: 100%;
+            width: 80%;
         }
         .main-heading {
             font-size: 6vw;
-            width: 80%;
+            width: 100%;
             line-height: 60px;
         }
     }
 
     @media (max-width: 428px) {
         .container{
-            width: 100%;
+            width: 80%;
         }
         section.Blog .main-page-text  {
             padding: 10px !important;
         }
         .main-heading {
             font-size: 7vw;
-            width: 80%;
             line-height: 26px;
             padding-bottom: 15px !important;
         }
