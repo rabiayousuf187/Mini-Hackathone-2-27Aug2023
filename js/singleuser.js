@@ -115,6 +115,40 @@ document.getElementById('bloggerImg').src = imageURL;
 
   };
 
+      
+  document.getElementById('blog-container').addEventListener("click", function (event) {
+    let link;
+    console.log(
+      "Button pressed",
+      event,
+      event.target.querySelector("i"),
+      event.target.tagName
+    );
+    if (event.target.tagName === "A" && event.target.getAttribute('id') === "read-more-btn" && event.target.classList.contains("read-more-btn")) {
+
+        const contentParagraph = event.target.parentNode.querySelector('.blog-content-text');
+        const moreButton = event.target;
+    
+        if (contentParagraph.classList.contains('expanded')) {
+          contentParagraph.classList.remove('expanded');
+          moreButton.textContent = 'More';
+        } else {
+          contentParagraph.classList.add('expanded');
+          moreButton.textContent = 'Less';
+        }
+    
+        event.stopPropagation();
+      
+    }
+    else {
+      console.log("not a target element");
+      event.stopPropagation();
+    }
+    // event.stopPropagation();
+
+    // addCart(selectedCategory, link);
+  })
+
   // ref(database, 'blogs/' + userId + `/${blogtitle}`)
   getAllItemData(`blogs/${userId}/`)
     .then((blogData) => {
