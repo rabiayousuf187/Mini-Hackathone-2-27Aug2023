@@ -78,6 +78,16 @@ window.addEventListener("load", () => {
     }
   };
 
+// Function to toggle between collapsed and expanded state
+let toggleContent = (btn) => {
+  console.log("This -==== ",btn);
+  const content = btn.previousElementSibling;
+  console.log("This -==== ",content);
+  content.classList.toggle('expanded');
+  btn.textContent = content.classList.contains('expanded') ? 'Less' : 'More';
+}
+
+  
   // container,
   // userId, username,email,
   // ele.blogId,
@@ -114,6 +124,7 @@ window.addEventListener("load", () => {
         <div class="blog-content">
           <p id="blog-content">
           ${blogcontent}</p>
+          <button id="read-more-btn" class="read-more-btn">More</button>
         </div>
         <div class="blog-content">
           <a id="${userId}" href="#" style="color: #830bcee6;
@@ -124,6 +135,11 @@ window.addEventListener("load", () => {
 
     container.insertAdjacentHTML("beforeend", itemHTML);
 
+    // const buttons = document.querySelectorAll('.read-more-btn');
+    // buttons.forEach(button => {
+    //   console.log("Button====", button)
+    //   button.addEventListener('click', toggleContent(button));
+    // });
     container.addEventListener("click", function (event) {
       let link;
       console.log(
@@ -132,7 +148,10 @@ window.addEventListener("load", () => {
         event.target.querySelector("i"),
         event.target.tagName
       );
-      if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
+      if (event.target.tagName === "BUTTON" && event.target.getAttribute('id') === "read-more-btn") {
+        toggleContent(event.target);
+      }
+      else if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
         console.log("Icon selected");
         
         let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
