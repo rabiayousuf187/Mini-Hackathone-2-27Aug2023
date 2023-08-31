@@ -1759,8 +1759,6 @@ img.lazy-image {
   overflow: hidden;
     }
     
-    
-    
     h3#blog-title {
         font-size: 15px;
     }
@@ -1801,10 +1799,40 @@ img.lazy-image {
         top: 20px;
         padding: 30px 20px;
     }
+    button#profile {
+        font-weight: 600;
+        letter-spacing: 1px;
+        width: 90px;
+        height: 34px;
+        font-size: 14px;
+        padding: 0px;
+    }
+    
+    button#publish {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .main-page-content.createblog {
+        margin: 22px 10px;
+    }
+    
+    .lower-form {
+        padding: 5px 16px;
+    }
 
+    .createblog .signup .form {
+        width: 90%;
+        margin: auto;
+        padding: 20px 10px;
+    }
 }
 @media (max-width: 375px){
     /* .container {
         width: 90%;
     } */
+    button#forgotPass, #loginLink, #registerLink {
+        font-size: 14px;
+    }
 }
