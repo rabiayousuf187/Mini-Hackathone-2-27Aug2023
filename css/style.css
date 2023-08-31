@@ -1722,7 +1722,23 @@ overflow: hidden;
         }
     
     }
+    @media (min-width: 400px) and (max-width: 650px) {
+        .right {
+            width: 70%;
+            padding: 30px;
+            margin-top: 200px;
+        }
+    }
+    
+    @media (min-width: 400px) and (max-width: 461px) {
+        .right {
+            width: 80%;
+            padding: 30px;
+            margin-top: 200px;
+        }
+    }
 @media (max-width: 650px) {
+
 /* @media (max-width: 428px) { */
     .container {
         width: 90%;
@@ -1791,13 +1807,9 @@ overflow: hidden;
         width: 100%;
         margin: 70px 10px;
     }
-    
-    .right {
-        width: 70%;
-    }
-    
+        
     .div-right {
-        top: 20px;
+        top: 0px;
         padding: 30px 20px;
     }
     button#profile {
@@ -1853,10 +1865,12 @@ overflow: hidden;
         
     }
 }
-@media (max-width: 375px){
-    /* .container {
-        width: 90%;
-    } */
+@media (max-width: 400px){
+    .right {
+        width: 100% !important;
+        padding: 30px;
+        margin-top: 200px;
+    }
     button#forgotPass, #loginLink, #registerLink {
         font-size: 14px;
     }
