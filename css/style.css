@@ -1822,7 +1822,7 @@ img.lazy-image {
         padding: 5px 16px;
     }
 
-    .createblog .signup .form {
+    .createblog .form {
         width: 90%;
         margin: auto;
         padding: 20px 10px;
@@ -1834,6 +1834,17 @@ img.lazy-image {
     }
     .signup .form input, .signup .form .inp-icon {
         font-size: 14px;
+    }
+
+    .profile-page form button{
+        font-size: 15px;
+        height: 40px;
+    }
+    .img-placeholder {
+        height: 120px;
+    }
+    .input-group.img-inp-div {
+        width: 90% !important;
     }
 }
 @media (max-width: 375px){
