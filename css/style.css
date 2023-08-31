@@ -1694,45 +1694,33 @@ img.lazy-image {
 /* ************* Media Query ********************** */
 /* @media (min-width: 320px) and (max-width: 480px) {  */
 
-@media (max-width: 428px) {
-    .product-body .uk-panel img {
-        height: 70px;
-        width: 70px;
-        padding: 10px;
+    @media (max-width: 884px) {
+        .purchase .container {
+            width: 90%;
+        }
+    
+        .purchase .show-item-inner .sub-cat-title {
+            justify-content: space-between;
+        }
+    
+        .purchase .item-weight-price {
+            flex-basis: 16%;
+        }
+    
+    
     }
-
-    .product-body .uk-panel h3 {
-        font-size: 14px;
+    
+    @media (max-width: 848px) {
+        .container {
+            width: 80%;
+        }
+    
+        .main-heading {
+            font-size: 6vw;
+            width: 100%;
+            line-height: 60px;
+        }
     }
-}
-
-@media (max-width: 884px) {
-    .purchase .container {
-        width: 90%;
-    }
-
-    .purchase .show-item-inner .sub-cat-title {
-        justify-content: space-between;
-    }
-
-    .purchase .item-weight-price {
-        flex-basis: 16%;
-    }
-
-
-}
-
-@media (max-width: 848px) {
-    .container {
-        width: 80%;
-    }
-
-    .main-heading {
-        font-size: 6vw;
-        width: 100%;
-        line-height: 60px;
-    }
-}
 
 @media (max-width: 428px) {
     .container {
@@ -1760,6 +1748,7 @@ img.lazy-image {
     }
     .header2 {
         flex-direction: row;
+        padding: 10px 5px;
     }
     div#blog-container {
         padding: 0px 10px;
@@ -1781,6 +1770,36 @@ img.lazy-image {
     }
     .blog-content a {
         font-size: 12px !important;
+    }
+    .product-body .uk-panel img {
+        height: 70px;
+        width: 70px;
+        padding: 10px;
+    }
+
+    .product-body .uk-panel h3 {
+        font-size: 14px;
+    }
+
+    .container.single-user {
+        width: 90%;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .left {
+        width: 100%;
+        margin: 70px 10px;
+    }
+    
+    .right {
+        width: 70%;
+    }
+    
+    .div-right {
+        top: 20px;
+        padding: 30px 20px;
     }
 
 }
