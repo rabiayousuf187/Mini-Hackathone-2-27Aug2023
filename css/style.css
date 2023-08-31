@@ -1691,12 +1691,15 @@ div#blog-container {
 
     @media (max-width: 848px) {
         .container {
-            width: 80%;
+            width: 100%;
         }
         .main-heading {
-            font-size: 4vw;
+            font-size: 6vw;
+            width: 80%;
+            line-height: 60px;
         }
     }
+
     @media (max-width: 428px) {
         .container{
             width: 100%;
@@ -1715,7 +1718,6 @@ div#blog-container {
             height: 55px;
             font-size: 22px;
             }
-        
-            
+                    
     }
     
