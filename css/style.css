@@ -1552,9 +1552,11 @@ section.main-page .main-heading {
     font-weight: 600;
     color: gray;
 }
-.my-blog{
+
+.my-blog {
     margin-bottom: 50px;
 }
+
 .my-blog .row {
     margin: 15px 0px;
 }
@@ -1569,12 +1571,14 @@ section.main-page .main-heading {
     background-position: center;
     background-size: contain;
 }
+
 .update-profile {
     width: 150px;
     font-size: 14px;
     height: 40px;
     margin: 5px 1px;
 }
+
 .top-header.all-blog {
     background: #4b0577;
     padding: 6px 14px;
@@ -1583,9 +1587,11 @@ section.main-page .main-heading {
     justify-content: space-evenly;
     margin: auto;
 }
-.top-header.all-blog a{
-color: yellow;
+
+.top-header.all-blog a {
+    color: yellow;
 }
+
 .container.single-user {
     display: flex;
     flex-direction: row;
@@ -1599,6 +1605,7 @@ color: yellow;
     width: 30%;
     background: repeating-linear-gradient(45deg, #0000001a, transparent 40px);
 }
+
 .div-right {
     position: relative;
     top: 200px;
@@ -1611,9 +1618,11 @@ color: yellow;
     text-align: end;
     box-shadow: 3px 4px 11px 8px #8a7a7a75;
 }
+
 .left {
     width: 70%;
 }
+
 .right #email {
     font-size: medium;
     text-align: end;
@@ -1627,6 +1636,7 @@ h3#profilename {
     font-weight: 700;
     text-align: end;
 }
+
 .div-img {
     display: flex;
     justify-content: center;
@@ -1635,6 +1645,7 @@ h3#profilename {
     /* padding: 10px 10px 10px; */
     margin: 40px 10px 0px;
 }
+
 img#bloggerImg {
     text-align: center;
     width: 200px;
@@ -1642,81 +1653,103 @@ img#bloggerImg {
     padding-bottom: 25px;
     overflow: hidden;
 }
+
 h2#bloggername {
     text-transform: uppercase;
     text-decoration-line: underline;
 }
+
 .my-blog .row {
     margin: 15px 0px;
     border-bottom: 2px solid #8080803d;
     padding-bottom: 25px;
 }
+
 div#blog-container {
     padding: 0px 30px;
 }
+
 .top-header.header2.greet {
     padding: 20px 0px;
-} 
+}
 
 /* ************* Media Query ********************** */
 /* @media (min-width: 320px) and (max-width: 480px) {  */
 
-    @media (max-width: 428px) {
-        .product-body .uk-panel img {
-            height: 70px;
-            width: 70px;
-            padding: 10px;
-        }
-    
-        .product-body .uk-panel h3 {
-            font-size: 14px;
-        }
-    }
-    
-    @media (max-width: 884px) {
-        .purchase .container {
-            width: 90%;
-        }
-    
-        .purchase .show-item-inner .sub-cat-title {
-            justify-content: space-between;
-        }
-    
-        .purchase .item-weight-price {
-            flex-basis: 16%;
-        }
-    
-    
+@media (max-width: 428px) {
+    .product-body .uk-panel img {
+        height: 70px;
+        width: 70px;
+        padding: 10px;
     }
 
-    @media (max-width: 848px) {
-        .container {
-            width: 80%;
-        }
-        .main-heading {
-            font-size: 6vw;
-            width: 100%;
-            line-height: 60px;
-        }
+    .product-body .uk-panel h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 884px) {
+    .purchase .container {
+        width: 90%;
     }
 
-    @media (max-width: 428px) {
-        .container{
-            width: 80%;
-        }
-        section.Blog .main-page-text  {
-            padding: 10px !important;
-        }
-        .main-heading {
-            font-size: 7vw;
-            line-height: 26px;
-            padding-bottom: 15px !important;
-        }
-        .btn-get-started {
-            width: 156px;
-            height: 55px;
-            font-size: 22px;
-            }
-                    
+    .purchase .show-item-inner .sub-cat-title {
+        justify-content: space-between;
     }
-    
+
+    .purchase .item-weight-price {
+        flex-basis: 16%;
+    }
+
+
+}
+
+@media (max-width: 848px) {
+    .container {
+        width: 80%;
+    }
+
+    .main-heading {
+        font-size: 6vw;
+        width: 100%;
+        line-height: 60px;
+    }
+}
+
+@media (max-width: 428px) {
+    .container {
+        width: 80%;
+    }
+
+    section.Blog .main-page-text {
+        padding: 10px !important;
+    }
+
+    .main-heading {
+        font-size: 7vw;
+        line-height: 26px;
+        padding-bottom: 15px !important;
+    }
+
+    .btn-get-started {
+        width: 156px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    .top-header {
+        flex-direction: column;
+    }
+    .header2 {
+        flex-direction: row;
+    }
+    div#blog-container {
+        padding: 0px 10px;
+    }
+
+}
+@media (max-width: 375px){
+    .container {
+        width: 90%;
+    }
+}
