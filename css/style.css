@@ -1684,10 +1684,10 @@ overflow: hidden;
 .expanded {
     max-height: none !important;
 }
-.blogger-img {
+/* .blogger-img {
     width: 70px;
     height: 70px;
-}
+} */
 
 /* ************* Media Query ********************** */
 /* @media (min-width: 320px) and (max-width: 480px) {  */
