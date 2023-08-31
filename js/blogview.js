@@ -302,11 +302,11 @@ window.addEventListener("load", () => {
 
   var logoutbtn = document.getElementById("logout");
 
-  logoutbtn.addEventListener("click", function () {
+  logoutbtn.addEventListener("click", ()=>{
 
     console.log("Logout");
     setTimeout(() => {
-      logout();
+      logout('./blogview.html');
     }, 1000);
   });
 

@@ -19,7 +19,7 @@ function isAuth() {
     // return userInfo =  false;
   }
 }
-function logout() {
+function logout( url = "../blogview.html") {
   const currentOrigin = window.location.origin;
   console.log("Current origin:", currentOrigin);
   
@@ -35,7 +35,13 @@ console.log("Local storage data for the origin has been removed.");
   // localStorage.removeItem("userAcc");
   // localStorage.removeItem
   console.log("Logout successfully! redirected to signin");
-  window.location.href = "./blogview.html";
+  
+  // let current_url = window.location;
+  // console.log("current_url window=== ", current_url);
+  // current_url = current_url + 'pages/blogview.html';
+  //       console.log("current_url === ", current_url);
+  //       // window.location.replace(current_url);
+  window.location.href = url;
 }
 
 export { isAuth, logout };
