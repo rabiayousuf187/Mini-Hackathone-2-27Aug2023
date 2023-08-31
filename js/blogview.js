@@ -158,7 +158,8 @@ window.addEventListener("load", () => {
         event.stopPropagation();
       
     }
-    else if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
+    else if (event.target.tagName === "A" && event.target.textContent === 'See all from this user') {
+    // else if (event.target.tagName === "A" && event.target.getAttribute('id') === userId) {
       console.log("Icon selected");
       
       let img = event.target.parentNode.parentNode.querySelector('img').getAttribute('src');
