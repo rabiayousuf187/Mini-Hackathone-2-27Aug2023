@@ -1754,7 +1754,7 @@ img.lazy-image {
         padding: 0px 10px;
     }
     .blog-content p {
-        font-size: 12px;
+        font-size: 13px;
         max-height: 3em; /* Display only 3 lines initially */
   overflow: hidden;
     }

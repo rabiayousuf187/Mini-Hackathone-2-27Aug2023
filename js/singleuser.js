@@ -105,8 +105,9 @@ document.getElementById('bloggerImg').src = imageURL;
             </div>
         </div>
         <div class="blog-content">
-            <p id="blog-content">
+            <p id="blog-content" class="blog-content-text">
                 ${blogcontent}</p>
+            <a id="read-more-btn" class="read-more-btn">More</a>
         </div>
     </div>
 </div>`;
